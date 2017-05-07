@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{FA212D69-D7D3-483A-A284-7DD56B632B56}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>KDS.Domain</RootNamespace>
+    <AssemblyName>KDS.Domain</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Entities\Parametrica.cs" />
+    <Compile Include="Entities\Grupo.cs" />
+    <Compile Include="Entities\PedidoProducto.cs" />
+    <Compile Include="Entities\Producto.cs" />
+    <Compile Include="Entities\ProductoPtoPrep.cs" />
+    <Compile Include="Entities\PtoPreparacion.cs" />
+    <Compile Include="Entities\TiempoConsumo.cs" />
+    <Compile Include="Entities\UnidadNegocio.cs" />
+    <Compile Include="Entities\Subgrupo.cs" />
+    <Compile Include="Interfaces\Repositories\IPedidoProductoRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IProductoRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IProductoPtoPrepRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IParametricaRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IPtoPreparacionRepository.cs" />
+    <Compile Include="Interfaces\Repositories\ITiempoConsumoRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IUnidadNegocioRepository.cs" />
+    <Compile Include="Interfaces\Services\IGeneralService.cs" />
+    <Compile Include="Interfaces\Services\IParametricaService.cs" />
+    <Compile Include="Interfaces\Services\IPedidoService.cs" />
+    <Compile Include="Interfaces\Services\ITiempoConsumoService.cs" />
+    <Compile Include="Interfaces\Services\ITiempoPreparacionService.cs" />
+    <Compile Include="Interfaces\Services\IPtoPreparacionService.cs" />
+    <Compile Include="Interfaces\Services\IServiceBase.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\GeneralService.cs" />
+    <Compile Include="Services\ParametricaService.cs" />
+    <Compile Include="Services\PedidoService.cs" />
+    <Compile Include="Services\PtoPreparacionService.cs" />
+    <Compile Include="Services\ServiceBase.cs" />
+    <Compile Include="Services\TiempoConsumoService.cs" />
+    <Compile Include="Services\TiempoPreparacionService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\KDS.Domain.Seedwork\KDS.Domain.Seedwork.csproj">
+      <Project>{70c733ef-bf3c-4753-9f74-c6696de28610}</Project>
+      <Name>KDS.Domain.Seedwork</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KDS.Infraestructure.CrossCutting\KDS.Infraestructure.CrossCutting.csproj">
+      <Project>{9e3504d9-5a8a-469e-9664-b46911609ae4}</Project>
+      <Name>KDS.Infraestructure.CrossCutting</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

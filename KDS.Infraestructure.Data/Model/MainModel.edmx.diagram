@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="68f71758519940be9340b82b80957d16" Name="Diagram1">
+        <EntityTypeShape EntityType="KDSModel.Iconografia" Width="1.5" PointX="7.75" PointY="3" />
+        <EntityTypeShape EntityType="KDSModel.OperadorPropiedad" Width="1.5" PointX="5.25" PointY="10.75" />
+        <EntityTypeShape EntityType="KDSModel.Parametrica" Width="1.5" PointX="3" PointY="5.5" />
+        <EntityTypeShape EntityType="KDSModel.PedidoProducto" Width="1.5" PointX="5.25" PointY="5.25" />
+        <EntityTypeShape EntityType="KDSModel.PtoPreparacion" Width="1.5" PointX="3" PointY="0.75" />
+        <EntityTypeShape EntityType="KDSModel.TipoParametrica" Width="1.5" PointX="0.75" PointY="6" />
+        <AssociationConnector Association="KDSModel.FK_Parametrica_OperadorPropiedad" />
+        <AssociationConnector Association="KDSModel.FK_Parametrica_PedidoProducto" />
+        <AssociationConnector Association="KDSModel.FK_TipoParametrica_Parametrica" />
+        <AssociationConnector Association="KDSModel.FK_PtoPreparacion_PedidoProducto" />
+        <EntityTypeShape EntityType="KDSModel.vw_Grupo" Width="1.5" PointX="7.375" PointY="6.75" />
+        <EntityTypeShape EntityType="KDSModel.vw_Producto" Width="1.5" PointX="9.375" PointY="6.75" />
+        <EntityTypeShape EntityType="KDSModel.vw_ProductoPedido" Width="1.5" PointX="10.375" PointY="0.75" />
+        <EntityTypeShape EntityType="KDSModel.vw_SubGrupo" Width="1.5" PointX="11.375" PointY="6.75" />
+        <EntityTypeShape EntityType="KDSModel.vw_UnidadNegocio" Width="1.5" PointX="7.375" PointY="11.75" />
+        <EntityTypeShape EntityType="KDSModel.ProductoPtoPrep" Width="1.5" PointX="5.25" PointY="0.75" />
+        <AssociationConnector Association="KDSModel.FK_PtoPreparacion_ProductoPtoPrep" />
+        <EntityTypeShape EntityType="KDSModel.TiempoConsumo" Width="1.5" PointX="0.75" PointY="10.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

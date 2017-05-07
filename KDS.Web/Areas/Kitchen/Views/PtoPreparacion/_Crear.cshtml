@@ -1,0 +1,96 @@
+﻿@model KDS.Web.Areas.Kitchen.Models.PtoPreparacionViewModel
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { autocomplete = "off", id = "frmPtoPreparacion", role = "form" }))
+{
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Punto de Preparación</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">                    
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.CodUnidadNegocio)
+                            @Html.DropDownListFor(model => model.CodUnidadNegocio, Model.UnidadesNegocio, "Seleccione", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.CodUnidadNegocio)
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Nombre)
+                            @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Nombre)
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">     
+                            @Html.LabelFor(model => model.Descripcion)
+                            @Html.TextAreaFor(m => m.Descripcion, new { @class = "form-control", rows = "3" })
+                            @Html.ValidationMessageFor(model => model.Descripcion)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="btnGuardar">Guardar</button>
+            </div>
+        </div>
+    </div>
+}
+
+<script type="text/javascript">
+    //#region Variables Globales
+    //#endregion
+
+    //#region Funciones Globales
+    //#endregion
+    $(function () {
+        //#region Variables
+        var form = $('#frmPtoPreparacion');
+        //#endregion
+
+        //#region Configuración
+        $('#Descripcion').charCount();
+        //#endregion
+
+        //#region Funciones
+        function crearPtoPreparacion() {                
+            if (form.isValid()) {
+                $.ajax({
+                    url: '@Url.Action("Crear")',
+                    type: 'POST',
+                    data: form.serializeForm(),
+                    success: function (result) {
+                        var data = $.parseJSON(result);
+                        if (data.Succeeded) {
+                            cargarGrdPtoPreparacion();
+                            $('#dlgPtoPreparacion').modal('hide');
+                        }
+                        notify(data);
+                    }
+                });
+            }
+        };
+
+        function load() {            
+            form.cleanValidation();
+            form.showRequiredFields();
+        }
+        //#endregion
+
+        //#region Eventos
+        $('#frmPtoPreparacion #btnGuardar').click(function () { crearPtoPreparacion(); });
+        //#endregion
+
+        //#region Load
+        load()
+        //#endregion        
+    });
+</script>

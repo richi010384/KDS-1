@@ -1,0 +1,516 @@
+﻿<!-- Autor: RICARDO G. MARTIN BEUERMANN -->
+
+@model KDS.Web.Areas.Kitchen.Models.BandejaTiempoConsumoViewModel
+
+@{
+    ViewBag.Title = "Gestión de Tiempos de Consumo";
+}
+
+
+<h3>Administración de Tiempos de Consumo</h3>
+    
+<div class="panel-group" id="accordion">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title blue">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+                        Productos - Familias
+                    </a>
+                    <span class="glyphicon glyphicon-question-sign blue" data-toggle="popover" aria-hidden="true"> </span>
+                </h4>
+            </div>
+            <div id="collapse1" class="panel-collapse collapse in">
+                <div class="panel-body">
+                    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmGrupoTiempo", role = "form" }))
+                    {
+                    <div class="row table">
+                        <table id="grdGrupoTiempo" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th class="center">Código</th>
+                                    <th class="center">Familia</th>
+                                    <th class="center">Tiempo Consumo</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title blue">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+                        Productos - Sub Familia
+                    </a>
+                    <span class="glyphicon glyphicon-question-sign blue" data-toggle="popover" aria-hidden="true"> </span>
+                </h4>
+            </div>
+            <div id="collapse2" class="panel-collapse collapse">
+                <div class="panel-body">
+                    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmSubGrupoTiempo", role = "form" }))
+                    {
+                    <div class="row filter">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.SubGrupo_CodGrupo)
+                                @Html.DropDownListFor(model => model.SubGrupo_CodGrupo, Model.SubGrupo_ItemsGrupos, "-Todos-", new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.SubGrupo_CodGrupo)
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="form-group">
+                                <button type="button" id="btnSubGrupoFiltrar" class="btn btn-default btn-only"><i class="fa fa-filter"></i> Filtrar</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row table">
+                        <table id="grdSubGrupoTiempo" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th class="center">Código</th>
+                                    <th class="center">Sub-Familia</th>
+                                    <th class="center">Familia</th>
+                                    <th class="center">Tiempo Consumo</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title blue">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
+                        Productos - Detalle
+                    </a>
+                    <span class="glyphicon glyphicon-question-sign blue" data-toggle="popover" aria-hidden="true"> </span>
+                </h4>
+            </div>
+            <div id="collapse3" class="panel-collapse collapse">
+                <div class="panel-body">
+                    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmProductoTiempo", role = "form" }))
+                    {
+                    <div class="row filter">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Producto_CodGrupo)
+                                @Html.DropDownListFor(model => model.Producto_CodGrupo, Model.Producto_ItemsGrupos, "-Todos-", new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Producto_CodGrupo)
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Producto_CodSubGrupo)
+                                @Html.DropDownListFor(model => model.Producto_CodSubGrupo, Model.Producto_ItemsSubGrupos, "-Todos-", new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Producto_CodSubGrupo)
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Producto_DescProducto)
+                                @Html.TextBox("Producto_DescProducto", null, new { @class = "form-control", @placeholder = "Nombre..." })
+                                @Html.ValidationMessageFor(model => model.Producto_DescProducto)
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="form-group">
+                                <button type="button" id="btnProductoFiltrar" class="btn btn-default btn-only"><i class="fa fa-filter"></i> Filtrar</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row table">
+                        <table id="grdProductoTiempo" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th class="center">Código</th>
+                                    <th class="center">Producto</th>
+                                    <th class="center">Sub-Familia</th>
+                                    <th class="center">Familia</th>
+                                    <th class="center">Tiempo Consumo</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+</div>
+
+<div class="modal fade" id="dlgTiempoConsumo" tabindex="-1" role="dialog"></div>
+
+    @section scripts{
+        @Scripts.Render("~/bundles/jqueryval")
+
+        <style>
+            tr div.expand {
+                width: 20px;
+                height: 20px;
+                background-image: url('../../../../Content/DataTables/images/details_open.png');
+            }
+
+            tr div.open {
+                background-image: url('../../../../Content/DataTables/images/details_close.png');
+            }
+        </style>
+
+        <script type="text/javascript">
+
+            //#region Variables Globales
+
+            var grdGrupoTiempo;
+            var indGrupoTiempo = false;
+
+            var grdSubGrupoTiempo;
+            var indSubGrupoTiempo = false;
+
+            var grdProductoTiempo;
+            var indProductoTiempo = false;
+
+            //#endregion
+
+            //#region GRUPOS - Funciones
+
+            function Grupo_CargarGrd() {
+                var form = $('#frmGrupoTiempo');
+                if (!form.isValid()) {
+                    return;
+                }
+                if (indGrupoTiempo) {
+                    grdGrupoTiempo.fnDraw();
+                    return;
+                }
+                grdGrupoTiempo =
+                    $("#grdGrupoTiempo").dataTable({
+                        order: [[2, "asc"]],
+                        dom: '<"top"i>rt<"bottom"flp><"clear">',
+                        responsive: true,
+                        ajax: {
+                            "url": '@Url.Action("TiempoConsumoPorGrupos")',
+                            "data": function (data) {                               
+                            },
+                        },
+                        aoColumns: [
+                            {
+                                "mData": null,
+                                "defaultContent": '<div class="expand /">',
+                                "sWidth": "5%",
+                                "bSortable": false,
+                                "bSearchable": false,
+                                "bVisible": false
+                            },
+                            {
+                                "sName": "CodGrupo",
+                                "sWidth": "5%",
+                                "bSortable": false
+                            },
+                            {
+                                "sName": "DescGrupo",
+                            },
+                            {
+                                "sWidth": "20%",
+                                "sClass": "center",
+                                "bSortable": false,
+                                "render": function (data, type, row) {
+                                    var html = '';
+                                    html += '<div class="action-buttons">';
+                                    html += '<a href="javascript:;" class="blue" onclick="DialogoTiempos_Cargar(\'' + row[1] + '\',\'GR\');"><i class="glyphicon glyphicon-time"></i> Asignar Tiempos</a>';
+                                    html += '</div>';
+                                    return html;
+                                }
+                            }
+                        ]
+                    });
+                indGrupoTiempo = true;
+            }
+
+            function Grupo_fnFormatDetails(oTable, nTr) {
+                var aData = oTable.fnGetData(nTr);
+                var sOut = '';
+                return sOut;
+            }
+
+            $('#grdGrupoTiempo tbody').on('click', 'td div.expand', function () {
+                var nTr = $(this).parents('tr')[0];
+                if (grdGrupoTiempo.fnIsOpen(nTr)) {
+                    $(this).removeClass('open');
+                    grdGrupoTiempo.fnClose(nTr);
+                } else {
+                    $.fn.dataTableExt.sErrMode = 'throw';
+                    $(this).addClass('open');
+                    grdGrupoTiempo.fnOpen(nTr, Grupo_fnFormatDetails(grdGrupoTiempo, nTr), 'details');
+                }
+            });
+
+            //#endregion
+
+            //#region SUBGRUPOS - Funciones
+
+            function SubGrupo_CargarGrd() {
+                var form = $('#frmSubGrupoTiempo');
+                if (!form.isValid()) {
+                    return;
+                }
+                if (indSubGrupoTiempo) {
+                    grdSubGrupoTiempo.fnDraw();
+                    return;
+                }
+                grdSubGrupoTiempo =
+                    $("#grdSubGrupoTiempo").dataTable({
+                        order: [[2, "asc"]],
+                        dom: '<"top"i>rt<"bottom"flp><"clear">',
+                        responsive: true,
+                        ajax: {
+                            "url": '@Url.Action("TiempoConsumoPorSubGrupos")',
+                            "data": function (data) {
+                                data.CodGrupo = function () { return $('#SubGrupo_CodGrupo').val() },
+                                data.CodPropiedad = '',
+                                data.Cantidad = 0
+                            },
+                        },
+                        aoColumns: [
+                            {
+                                "mData": null,
+                                "defaultContent": '<div class="expand /">',
+                                "sWidth": "5%",
+                                "bSortable": false,
+                                "bSearchable": false,
+                                "bVisible": false
+                            },
+                            {
+                                "sName": "CodSubGrupo",
+                                "sWidth": "5%",
+                                "bSortable": false
+                            },
+                            {
+                                "sName": "DescSubGrupo",
+                            },
+                            {
+                                "sName": "DescGrupo",
+                            },
+                            {
+                                "sWidth": "20%",
+                                "sClass": "center",
+                                "bSortable": false,
+                                "render": function (data, type, row) {
+                                    var html = '';
+                                    html += '<div class="action-buttons">';
+                                    html += '<a href="javascript:;" class="blue" onclick="DialogoTiempos_Cargar(\'' + row[1] + '\',\'SG\');"><i class="glyphicon glyphicon-time"></i> Asignar tiempos</a>';
+                                    html += '</div>';
+                                    return html;
+                                }
+                            }
+                        ]
+                    });
+                indSubGrupoTiempo = true;
+            }
+
+            function SubGrupo_fnFormatDetails(oTable, nTr) {
+                var aData = oTable.fnGetData(nTr);
+                var sOut = '';
+                return sOut;
+            }
+
+            $('#grdSubGrupoTiempo tbody').on('click', 'td div.expand', function () {
+                var nTr = $(this).parents('tr')[0];
+                if (grdSubGrupoTiempo.fnIsOpen(nTr)) {
+                    $(this).removeClass('open');
+                    grdSubGrupoTiempo.fnClose(nTr);
+                } else {
+                    $.fn.dataTableExt.sErrMode = 'throw';
+                    $(this).addClass('open');
+                    grdSubGrupoTiempo.fnOpen(nTr, SubGrupo_fnFormatDetails(grdSubGrupoTiempo, nTr), 'details');
+                }
+            });
+
+            //#endregion
+
+            //#region PRODUCTOS - Funciones
+
+            function Producto_CargarGrd() {
+                var form = $('#frmProductoTiempo');
+                if (!form.isValid()) {
+                    return;
+                }
+                if (indProductoTiempo) {
+                    grdProductoTiempo.fnDraw();
+                    return;
+                }
+                grdProductoTiempo =
+                    $("#grdProductoTiempo").dataTable({
+                        order: [[2, "asc"]],
+                        dom: '<"top"i>rt<"bottom"flp><"clear">',
+                        responsive: true,
+                        ajax: {
+                            "url": '@Url.Action("TiempoConsumoPorProductos")',
+                            "data": function (data) {
+                                data.CodGrupo = function () { return $('#Producto_CodGrupo').val() },
+                                data.CodSubGrupo = function () { return $('#Producto_CodSubGrupo').val() },
+                                data.DescProducto = function () { return $('#Producto_DescProducto').val() },
+                                data.CodPropiedad = '',
+                                data.Cantidad = 0
+                            },
+                        },
+                        aoColumns: [
+                            {
+                                "mData": null,
+                                "defaultContent": '<div class="expand /">',
+                                "sWidth": "5%",
+                                "bSortable": false,
+                                "bSearchable": false,
+                                 "bVisible": false
+                            },
+                            {
+                                "sName": "CodProducto",
+                                "sWidth": "5%",
+                                "bSortable": false
+                            },
+                            {
+                                "sName": "DescProducto",
+                            },
+                            {
+                                "sName": "DescSubGrupo",
+                            },
+                            {
+                                "sName": "DescGrupo",
+                            },
+                            {
+                                "sWidth": "20%",
+                                "sClass": "center",
+                                "bSortable": false,
+                                "render": function (data, type, row) {
+                                    var html = '';
+                                    html += '<div class="action-buttons">';
+                                    html += '<a href="javascript:;" class="blue" onclick="DialogoTiempos_Cargar(\'' + row[1] + '\',\'PR\');"><i class="glyphicon glyphicon-time"></i> Asignar tiempos</a>';
+                                    html += '</div>';
+                                    return html;
+                                }
+                            }
+                        ]
+                    });
+                indProductoTiempo = true;
+            }
+
+            function Producto_fnFormatDetails(oTable, nTr) {
+                var aData = oTable.fnGetData(nTr);
+                var sOut = '';
+                return sOut;
+            }
+
+            $('#grdProductoTiempo tbody').on('click', 'td div.expand', function () {
+                var nTr = $(this).parents('tr')[0];
+                if (grdProductoTiempo.fnIsOpen(nTr)) {
+                    $(this).removeClass('open');
+                    grdProductoTiempo.fnClose(nTr);
+                } else {
+                    $.fn.dataTableExt.sErrMode = 'throw';
+                    $(this).addClass('open');
+                    grdProductoTiempo.fnOpen(nTr, Producto_fnFormatDetails(grdProductoTiempo, nTr), 'details');
+                }
+            });
+
+            function Producto_CargarSubGrupos() {
+                $.ajax({
+                    url: '@Url.Action("SubGruposListar")',
+                    data: { CodGrupo: $('#Producto_CodGrupo').val() },
+                    success: function (result) {
+                        $("#Producto_CodSubGrupo").empty();
+                        $("#Producto_CodSubGrupo").append($("<option></option>").val('').html('-Todas-'));
+                        var data = $.parseJSON(result);
+                        $.each(data, function (idx, obj) {
+                            $("#Producto_CodSubGrupo").append($("<option></option>").attr("value", obj.Value).text(obj.Text));
+                        });
+                    }
+                });
+            }
+
+            //#endregion
+
+            //#region TIEMPOS DE CONSUMO - Transacciones CRUD
+
+            function DialogoTiempos_Cargar(id, nivel) {
+                $.ajax({
+                    url: '@Url.Action("Guardar")',
+                    data: { Codigo: id, Nivel: nivel },
+                    success: function (result) {
+                        $("#dlgTiempoConsumo").empty().html(result).modal();
+                    }
+                });
+            };
+
+            function DialogoTiempos_Cerrar() {
+                $("#dlgTiempoConsumo").empty();
+                var form = null;
+
+                form = $('#frmGrupoTiempo');
+                form.cleanValidation();
+                form.showRequiredFields();
+
+                form = $('#frmSubGrupoTiempo');
+                form.cleanValidation();
+                form.showRequiredFields();
+
+                form = $('#frmProductoTiempo');
+                form.cleanValidation();
+                form.showRequiredFields();
+            };
+
+            //#endregion
+
+            $(function () {
+
+                //#region Funciones de Carga Inicial
+
+                function load() {
+                    Grupo_CargarGrd();
+                    SubGrupo_CargarGrd();
+                    Producto_CargarGrd();
+                }
+
+                //#endregion
+
+                //#region Eventos
+
+                $('#btnSubGrupoFiltrar').click(function () { SubGrupo_CargarGrd(); });
+
+                $('#Producto_CodGrupo').change(function () { Producto_CargarSubGrupos() });
+
+                $('#btnProductoFiltrar').click(function () { Producto_CargarGrd(); });
+
+                //#endregion
+
+                //#region Manejo de Estilos
+
+                $(function () {
+                    $('[data-toggle="popover"]').popover({
+                        title: 'Información',
+                        content: 'Despliegue el panel, ubique el item deseado y presione el botón asignar tiempos según modalidad de consumo.',
+                        container: 'body',
+                        trigger: 'click hover focus',
+                        placement: 'right',
+                        delay: { "show": 500, "hide": 100 }
+                    })
+                })
+
+                $('#dlgTiempoConsumo').on('hidden.bs.modal', function () { DialogoTiempos_Cerrar(); });
+
+                //#region Estilos
+
+                //#region Load
+
+                load();
+
+                //#endregion
+            });
+        </script>
+    }

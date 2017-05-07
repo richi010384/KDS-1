@@ -1,0 +1,444 @@
+﻿<!-- Autor: RICARDO G. MARTIN BEUERMANN -->
+
+@model KDS.Web.Areas.Kitchen.Models.TiempoConsumoViewModel
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { autocomplete = "off", id = "frmTiempoConsumo" }))
+{
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Tiempo de Consumo</h4>
+            </div>
+            <div class="modal-body">
+                @Html.HiddenFor(model => model.Nivel)
+                @Html.HiddenFor(model => model.CodGrupo)
+                @Html.HiddenFor(model => model.CodSubGrupo)
+                @Html.HiddenFor(model => model.CodProducto)
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Clasificación General</h3>
+                    </div>
+                    <div class="row filter">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.DescGrupo)
+                                @Html.TextBoxFor(model => model.DescGrupo, new { @class = "form-control", @readonly = "readonly" })
+                                @Html.ValidationMessageFor(model => model.DescGrupo)
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.DescSubGrupo)
+                                @Html.TextBoxFor(model => model.DescSubGrupo, new { @class = "form-control", @readonly = "readonly" })
+                                @Html.ValidationMessageFor(model => model.DescSubGrupo)
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.DescProducto)
+                                @Html.TextBoxFor(model => model.DescProducto, new { @class = "form-control", @readonly = "readonly" })
+                                @Html.ValidationMessageFor(model => model.DescProducto)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Agregar Tiempos de Consumo</h3>
+                    </div>
+                    <div class="row filter">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.CodPropiedad)
+                                @Html.DropDownListFor(model => model.CodPropiedad, Model.LstModoConsumo, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.CodPropiedad)
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Cantidad)
+                                @Html.DropDownListFor(model => model.Cantidad, Model.LstCantidad, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Cantidad)
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.MinComensales)
+                                @Html.TextBoxFor(model => model.MinComensales, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.MinComensales)
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.MaxComensales)
+                                @Html.TextBoxFor(model => model.MaxComensales, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.MaxComensales)
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Tiempo)
+                                @Html.TextBoxFor(model => model.Tiempo, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Tiempo)
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="form-group">
+                                <button type="button" id="btnAgregar" class="btn btn-default btn-only"><i class="fa fa-save"></i> Agregar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Modalidad de Consumo - Individual</h3>
+                    </div>
+                    <div class="row table">
+                        <table id="grdTiempoIndividual" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th class="center">Cantidad Platos</th>
+                                    <th class="center">Mínimo de Compensales</th>
+                                    <th class="center">Máximo de Compensales</th>
+                                    <th class="center">Tiempo Consumo (min)</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Modalidad de Consumo - Compartida</h3>
+                    </div>
+                    <div class="row filter">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Filtro_CodPropiedad)
+                                @Html.DropDownListFor(model => model.Filtro_CodPropiedad, Model.Filtro_LstModoConsumo, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Filtro_CodPropiedad)
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Filtro_Cantidad)
+                                @Html.DropDownListFor(model => model.Filtro_Cantidad, Model.Filtro_LstCantidad, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Filtro_Cantidad)
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="form-group">
+                                <button type="button" id="btnFiltrar" class="btn btn-default btn-only"><i class="fa fa-filter"></i> Filtrar</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row table">
+                        <table id="grdTiempoCompartido" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th class="center">Cantidad Platos</th>
+                                    <th class="center">Mínimo de Compensales</th>
+                                    <th class="center">Máximo de Compensales</th>
+                                    <th class="center">Tiempo Consumo (min)</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>                        
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<style>
+    
+    .modal-dialog {
+      width: 80%;
+    }
+    .modal-body {
+      overflow-y: auto;
+    }
+
+</style>
+
+<script type="text/javascript">
+
+    //#region Variables Globales
+
+    var grdTiempoIndividual;
+    var indTiempoIndividual = false;
+
+    var grdTiempoCompartido;
+    var indTiempoCompartido = false;
+
+    //#endregion
+
+    //#region TIEMPOS INDIVIDUALES - Funciones
+
+    function TiempoIndividual_CargarGrd() {
+        if (indTiempoIndividual) {
+            grdTiempoIndividual.fnDraw();
+            return;
+        }
+        grdTiempoIndividual =
+            $("#grdTiempoIndividual").dataTable({
+                order: [[2, "asc"]],
+                paging: false,
+                dom: '<"top">rt<"bottom">',
+                responsive: true,
+                ajax: {
+                    "url": '@Url.Action("TiempoConsumoPorModalidad")',
+                    "data": function (data) {
+                        data.Nivel = function () { return $("#Nivel").val() },
+                        data.CodGrupo = function () { return $("#CodGrupo").val() },
+                        data.CodSubGrupo = function () { return $("#CodSubGrupo").val() },
+                        data.CodProducto = function () { return $("#CodProducto").val() },
+                        data.CodPropiedad = 'I',
+                        data.Cantidad = 1 
+                    },
+                },
+                aoColumns: [
+                    {
+                        "sName": "CodTiempoConsumo",
+                        "sClass": "center",
+                        "bSortable": false,
+                        "bVisible": false,
+                    },
+                    {
+                        "sName": "Cantidad",
+                        "bSortable": false
+                    },
+                    {
+                        "sName": "MinComensales",
+                    },
+                    {
+                        "sName": "MaxComensales",
+                        "bSortable": false
+                    },
+                    {
+                        "render": function (data, type, row) {
+                            var html = ' <div class="input-group">';
+                            html += '<span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>';
+                            html += '<input id="tiempo_individual_' + row[0] + '" type="text" class="form-control" value=\'' + row[4] + '\' name="tiempo" placeholder="t(x)">';
+                            html += '</div>';
+                            return html;
+                        },
+                        "bSortable": false
+                    },
+                    {
+                        "render": function (data, type, row) {
+                            var html = '';
+                            html += '<div class="action-buttons">';
+                            html += '<a href="javascript:;" class="blue" onclick="EditarTiempo(\'' + row[0] + '\',0);"><i class="fa fa-save fa-lg"></i></a>';
+                            html += '<a href="javascript:;" class="red" onclick="EliminarTiempo(\'' + row[0] + '\');"><i class="fa fa-trash-o fa-lg"></i></a>';
+                            html += '</div>';
+                            return html;
+                        },
+                        "bSortable": false
+                    }
+                ]
+            });
+        indTiempoIndividual = true;
+    }
+
+    //#endregion
+
+    //#region TIEMPOS COMPARTIDO - Funciones
+
+    function TiempoCompartido_CargarGrd() {
+        if (indTiempoCompartido) {
+            grdTiempoCompartido.fnDraw();
+            return;
+        }
+        grdTiempoCompartido =
+            $("#grdTiempoCompartido").dataTable({
+                order: [[2, "asc"]],
+                paging: false,
+                dom: '<"top">rt<"bottom">',
+                responsive: true,
+                ajax: {
+                    "url": '@Url.Action("TiempoConsumoPorModalidad")',
+                    "data": function (data) {
+                        data.Nivel = function () { return $("#Nivel").val() },
+                        data.CodGrupo = function () { return $("#CodGrupo").val() },
+                        data.CodSubGrupo = function () { return $("#CodSubGrupo").val() },
+                        data.CodProducto = function () { return $("#CodProducto").val() },
+                        data.CodPropiedad = function () { return $("#Filtro_CodPropiedad").val() },
+                        data.Cantidad = function () { return $("#Filtro_Cantidad").val() == "" ? 0 : $("#Filtro_Cantidad").val() }
+                    },
+                },
+                aoColumns: [
+                    {
+                        "sName": "CodTiempoConsumo",
+                        "sClass": "center",
+                        "bSortable": false,
+                        "bVisible": false,
+                    },
+                    {
+                        "sName": "Cantidad",
+                        "bSortable": false
+                    },
+                    {
+                        "sName": "MinComensales",
+                    },
+                    {
+                        "sName": "MaxComensales",
+                        "bSortable": false
+                    },
+                    {
+                        "render": function (data, type, row) {
+                            var html = ' <div class="input-group">';
+                            html += '<span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>';
+                            html += '<input id="tiempo_compartido_' + row[0] + '" type="text" class="form-control" value=\'' + row[4] + '\' name="tiempo" placeholder="t(x)">';
+                            html += '</div>';
+                            return html;
+                        },
+                        "bSortable": false
+                    },
+                    {
+                        "render": function (data, type, row) {
+                            var html = '';
+                            html += '<div class="action-buttons">';
+                            html += '<a href="javascript:;" class="blue" onclick="EditarTiempo(\'' + row[0] + '\',1);"><i class="fa fa-save fa-lg"></i></a>';
+                            html += '<a href="javascript:;" class="red" onclick="EliminarTiempo(\'' + row[0] + '\');"><i class="fa fa-trash-o fa-lg"></i></a>';
+                            html += '</div>';
+                            return html;
+                        },
+                        "bSortable": false
+                    }
+                ]
+            });
+        indTiempoCompartido = true;
+    }
+
+    function AgregarTiempoConsumo() {
+        var form = $('#frmTiempoConsumo');
+        if (form.isValid()) {
+            $.ajax({
+                url: '@Url.Action("Guardar")',
+                type: 'POST',
+                data: form.serializeForm(),
+                success: function (result) {
+                    var data = $.parseJSON(result);
+                    if (data.Succeeded) {
+                        TiempoIndividual_CargarGrd();
+                        TiempoCompartido_CargarGrd();
+                        //$('#dlgTiempoConsumo').modal('hide');
+                    }
+                    notify(data);
+                }
+            });
+        }
+    }
+
+    function EliminarTiempo(id) {
+        var promise = ask();
+        promise.done(function (resolve) {
+            var notice = resolve.notice;
+            $.ajax({
+                url: '@Url.Action("Eliminar")',
+                type: 'POST',
+                data: { id: id },
+                success: function (result) {
+                    var data = $.parseJSON(result);
+                    if (data.Succeeded) {
+                        TiempoIndividual_CargarGrd();
+                        TiempoCompartido_CargarGrd();
+                    }
+                    notify(data);
+                }
+            });
+        });
+    };
+
+    function EditarTiempo(id, modo) {        
+        var tiempo = (modo == 1) ? $('#tiempo_compartido_'.concat(id)).val() : $('#tiempo_individual_'.concat(id)).val();
+        $.ajax({
+            url: '@Url.Action("Editar")',
+            type: 'POST',
+            data: {
+                id: id,
+                tiempo : tiempo
+            },
+            success: function (result) {
+                var data = $.parseJSON(result);
+                if (data.Succeeded) {
+                    //$('#dlgTiempoConsumo').modal('hide');
+                }
+                notify(data);
+            }
+        });
+    };
+
+    function HabilitarControles() {
+        if ($('#CodPropiedad').val() == 'I') {
+            $('#Cantidad').val('1');
+            $('#Cantidad').attr('disabled', 'disabled');;
+            $('#MinComensales').val('1');
+            $('#MinComensales').attr('disabled','disabled');
+            $('#MaxComensales').val('1');
+            $('#MaxComensales').attr('disabled', 'disabled');;
+            $('#Tiempo').val('0');
+        }
+        else {
+            $('#Cantidad').val('1');
+            $('#Cantidad').removeAttr('disabled');
+            $('#MinComensales').val('0');
+            $('#MinComensales').removeAttr('disabled');
+            $('#MaxComensales').val('0');
+            $('#MaxComensales').removeAttr('disabled');
+            $('#Tiempo').val('0');
+        }
+    }
+
+    //#endregion
+
+    $(function () {
+
+        //#region Variables
+        var form = $('#frmTiempoConsumo');
+        //#endregion
+
+        //#region Funciones
+
+        function load() {
+            form.cleanValidation();
+            form.showRequiredFields();
+            TiempoIndividual_CargarGrd();
+            TiempoCompartido_CargarGrd();
+            HabilitarControles();
+        }
+
+        //#endregion
+
+        //#region Eventos
+
+        $('#btnFiltrar').click(function () {
+            TiempoIndividual_CargarGrd();   
+            TiempoCompartido_CargarGrd(); 
+        });
+
+        $('#btnAgregar').click(function () {
+            AgregarTiempoConsumo();
+        });
+
+        $('#CodPropiedad').change(function () { HabilitarControles() });
+
+        //#endregion
+
+        //#region Load
+
+        load();
+
+        //#endregion
+    });
+</script>

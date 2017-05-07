@@ -1,0 +1,1452 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="KDSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Iconografia">
+          <Key>
+            <PropertyRef Name="CodIconografia" />
+          </Key>
+          <Property Name="CodIconografia" Type="int" Nullable="false" />
+          <Property Name="CodProducto" Type="varchar" MaxLength="7" />
+          <Property Name="CodOperador" Type="varchar" MaxLength="2" />
+          <Property Name="CodPropiedad" Type="varchar" MaxLength="4" />
+          <Property Name="NombreArchivo" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="EstadoRegistro" Type="bit" Nullable="false" />
+          <Property Name="UsuarioCreacion" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+          <Property Name="UsuarioModificacion" Type="varchar" MaxLength="20" />
+          <Property Name="FechaModificacion" Type="datetime" />
+        </EntityType>
+        <EntityType Name="OperadorPropiedad">
+          <Key>
+            <PropertyRef Name="CodOperadorPropiedad" />
+          </Key>
+          <Property Name="CodOperadorPropiedad" Type="int" Nullable="false" />
+          <Property Name="CodContexto" Type="int" Nullable="false" />
+          <Property Name="CodOperador" Type="varchar" MaxLength="2" />
+          <Property Name="CodPropiedad" Type="varchar" MaxLength="4" />
+          <Property Name="EstadoRegistro" Type="bit" Nullable="false" />
+          <Property Name="UsuarioCreacion" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+          <Property Name="UsuarioModificacion" Type="varchar" MaxLength="20" />
+          <Property Name="FechaModificacion" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Parametrica">
+          <Key>
+            <PropertyRef Name="CodParametrica" />
+          </Key>
+          <Property Name="CodParametrica" Type="int" Nullable="false" />
+          <Property Name="CodTipoParametrica" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="400" />
+          <Property Name="Estado" Type="bit" />
+          <Property Name="EstadoRegistro" Type="bit" Nullable="false" />
+          <Property Name="UsuarioCreacion" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+          <Property Name="UsuarioModificacion" Type="varchar" MaxLength="20" />
+          <Property Name="FechaModificacion" Type="datetime" />
+          <Property Name="NombreAux" Type="varchar" MaxLength="50" />
+          <Property Name="Valor" Type="varchar" MaxLength="400" />
+        </EntityType>
+        <EntityType Name="PedidoProducto">
+          <Key>
+            <PropertyRef Name="CodPedidoProducto" />
+          </Key>
+          <Property Name="CodPedidoProducto" Type="int" Nullable="false" />
+          <Property Name="CodPtoPreparacion" Type="int" Nullable="false" />
+          <Property Name="CodEstadoPedidoProd" Type="int" />
+          <Property Name="CodPedido" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="CodProducto" Type="varchar" MaxLength="7" Nullable="false" />
+          <Property Name="CodOperador" Type="varchar" MaxLength="2" />
+          <Property Name="CodPropiedad" Type="varchar" MaxLength="4" />
+          <Property Name="HoraSalida" Type="datetime" Nullable="false" />
+          <Property Name="Observaciones" Type="varchar" MaxLength="800" />
+          <Property Name="EstadoRegistro" Type="bit" Nullable="false" />
+          <Property Name="UsuarioCreacion" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+          <Property Name="UsuarioModificacion" Type="varchar" MaxLength="20" />
+          <Property Name="FechaModificacion" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ProductoPtoPrep">
+          <Key>
+            <PropertyRef Name="CodProductoPtoPrep" />
+          </Key>
+          <Property Name="CodProductoPtoPrep" Type="int" Nullable="false" />
+          <Property Name="CodPtoPreparacion" Type="int" Nullable="false" />
+          <Property Name="CodProducto" Type="varchar" MaxLength="7" Nullable="false" />
+          <Property Name="IndEnsamblado" Type="bit" Nullable="false" />
+          <Property Name="TiempoPrepDirecto" Type="smallint" Nullable="false" />
+          <Property Name="TiempoPrepSegundo" Type="smallint" Nullable="false" />
+          <Property Name="MinCantidad" Type="tinyint" Nullable="false" />
+          <Property Name="MaxCantidad" Type="tinyint" Nullable="false" />
+          <Property Name="EstadoRegistro" Type="bit" Nullable="false" />
+          <Property Name="UsuarioCreacion" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+          <Property Name="UsuarioModificacion" Type="varchar" MaxLength="20" />
+          <Property Name="FechaModificacion" Type="datetime" />
+        </EntityType>
+        <EntityType Name="PtoPreparacion">
+          <Key>
+            <PropertyRef Name="CodPtoPreparacion" />
+          </Key>
+          <Property Name="CodPtoPreparacion" Type="int" Nullable="false" />
+          <Property Name="CodUnidadNegocio" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="400" />
+          <Property Name="EstadoRegistro" Type="bit" Nullable="false" />
+          <Property Name="UsuarioCreacion" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+          <Property Name="UsuarioModificacion" Type="varchar" MaxLength="20" />
+          <Property Name="FechaModificacion" Type="datetime" />
+        </EntityType>
+        <EntityType Name="TiempoConsumo">
+          <Key>
+            <PropertyRef Name="CodTiempoConsumo" />
+          </Key>
+          <Property Name="CodTiempoConsumo" Type="int" Nullable="false" />
+          <Property Name="CodGrupo" Type="varchar" MaxLength="2" />
+          <Property Name="CodSubgrupo" Type="varchar" MaxLength="4" />
+          <Property Name="CodProducto" Type="varchar" MaxLength="7" />
+          <Property Name="CodPropiedad" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Cantidad" Type="tinyint" Nullable="false" />
+          <Property Name="MinComensales" Type="tinyint" Nullable="false" />
+          <Property Name="MaxComensales" Type="tinyint" Nullable="false" />
+          <Property Name="Tiempo" Type="smallint" Nullable="false" />
+          <Property Name="EstadoRegistro" Type="bit" Nullable="false" />
+          <Property Name="UsuarioCreacion" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+          <Property Name="UsuarioModificacion" Type="varchar" MaxLength="20" />
+          <Property Name="FechaModificacion" Type="datetime" />
+        </EntityType>
+        <EntityType Name="TipoParametrica">
+          <Key>
+            <PropertyRef Name="CodTipoParametrica" />
+          </Key>
+          <Property Name="CodTipoParametrica" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="400" />
+          <Property Name="EstadoRegistro" Type="bit" Nullable="false" />
+          <Property Name="UsuarioCreacion" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+          <Property Name="UsuarioModificacion" Type="varchar" MaxLength="20" />
+          <Property Name="FechaModificacion" Type="datetime" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'KDS.dbo.vw_Grupo' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vw_Grupo">
+          <Key>
+            <PropertyRef Name="CodGrupo" />
+          </Key>
+          <Property Name="CodGrupo" Type="nvarchar" MaxLength="2" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="24" />
+          <Property Name="Desripcion" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'KDS.dbo.vw_Producto' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vw_Producto">
+          <Key>
+            <PropertyRef Name="CodProducto" />
+          </Key>
+          <Property Name="CodProducto" Type="nvarchar" MaxLength="7" Nullable="false" />
+          <Property Name="DescProducto" Type="nvarchar" MaxLength="50" />
+          <Property Name="CodGrupo" Type="nvarchar" MaxLength="2" />
+          <Property Name="DescGrupo" Type="nvarchar" MaxLength="50" />
+          <Property Name="CodSubGrupo" Type="nvarchar" MaxLength="4" />
+          <Property Name="DescSubGrupo" Type="nvarchar" MaxLength="50" />
+          <Property Name="CodTipoProducto" Type="nvarchar" MaxLength="2" />
+          <Property Name="DescTipoProducto" Type="nvarchar" MaxLength="50" />
+          <Property Name="CodArea" Type="nvarchar" MaxLength="3" />
+          <Property Name="DescArea" Type="nvarchar" MaxLength="24" />
+          <Property Name="CodUnidadNegocio" Type="nvarchar" MaxLength="2" />
+          <Property Name="DescUnidadNegocio" Type="nvarchar" MaxLength="24" />
+          <Property Name="Combo" Type="bit" />
+          <Property Name="Activo" Type="bit" />
+          <Property Name="FechaRegistro" Type="smalldatetime" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'KDS.dbo.vw_ProductoPedido' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vw_ProductoPedido">
+          <Key>
+            <PropertyRef Name="lCombo" />
+            <PropertyRef Name="tCodigoPedido" />
+            <PropertyRef Name="tItem" />
+            <PropertyRef Name="tDescPropiedad" />
+          </Key>
+          <Property Name="lCombo" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="tCodigoPedido" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="tItem" Type="nvarchar" MaxLength="3" Nullable="false" />
+          <Property Name="tItemCombo" Type="nvarchar" MaxLength="3" />
+          <Property Name="nOrden" Type="int" />
+          <Property Name="nCantidad" Type="float" />
+          <Property Name="tCodigoGrupo" Type="nvarchar" MaxLength="2" />
+          <Property Name="tDescGrupo" Type="nvarchar" MaxLength="50" />
+          <Property Name="tCodigoSubGrupo" Type="nvarchar" MaxLength="4" />
+          <Property Name="tDescSubGrupo" Type="nvarchar" MaxLength="50" />
+          <Property Name="tCodigoProducto" Type="nvarchar" MaxLength="7" />
+          <Property Name="tDetallado" Type="nvarchar" MaxLength="50" />
+          <Property Name="tCodigoPropiedad" Type="nvarchar" MaxLength="4" />
+          <Property Name="tDescPropiedad" Type="nvarchar" MaxLength="103" Nullable="false" />
+          <Property Name="tTipoPedido" Type="nvarchar" MaxLength="2" />
+          <Property Name="tDescTipoPedido" Type="nvarchar" MaxLength="50" />
+          <Property Name="tArea" Type="nvarchar" MaxLength="3" />
+          <Property Name="tDescArea" Type="nvarchar" MaxLength="24" />
+          <Property Name="tUnidadNegocio" Type="nvarchar" MaxLength="2" />
+          <Property Name="tDescUnidadNegocio" Type="nvarchar" MaxLength="24" />
+          <Property Name="tEstadoItem" Type="nvarchar" MaxLength="1" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'KDS.dbo.vw_SubGrupo' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vw_SubGrupo">
+          <Key>
+            <PropertyRef Name="CodGrupo" />
+            <PropertyRef Name="CodSubGrupo" />
+          </Key>
+          <Property Name="CodGrupo" Type="nvarchar" MaxLength="2" Nullable="false" />
+          <Property Name="CodSubGrupo" Type="nvarchar" MaxLength="4" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="24" />
+          <Property Name="Desripcion" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'KDS.dbo.vw_UnidadNegocio' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vw_UnidadNegocio">
+          <Key>
+            <PropertyRef Name="CodUnidadNegocio" />
+          </Key>
+          <Property Name="CodUnidadNegocio" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="24" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Parametrica_OperadorPropiedad">
+          <End Role="Parametrica" Type="Self.Parametrica" Multiplicity="1" />
+          <End Role="OperadorPropiedad" Type="Self.OperadorPropiedad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parametrica">
+              <PropertyRef Name="CodParametrica" />
+            </Principal>
+            <Dependent Role="OperadorPropiedad">
+              <PropertyRef Name="CodContexto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Parametrica_PedidoProducto">
+          <End Role="Parametrica" Type="Self.Parametrica" Multiplicity="0..1" />
+          <End Role="PedidoProducto" Type="Self.PedidoProducto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parametrica">
+              <PropertyRef Name="CodParametrica" />
+            </Principal>
+            <Dependent Role="PedidoProducto">
+              <PropertyRef Name="CodEstadoPedidoProd" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PtoPreparacion_PedidoProducto">
+          <End Role="PtoPreparacion" Type="Self.PtoPreparacion" Multiplicity="1" />
+          <End Role="PedidoProducto" Type="Self.PedidoProducto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PtoPreparacion">
+              <PropertyRef Name="CodPtoPreparacion" />
+            </Principal>
+            <Dependent Role="PedidoProducto">
+              <PropertyRef Name="CodPtoPreparacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PtoPreparacion_ProductoPtoPrep">
+          <End Role="PtoPreparacion" Type="Self.PtoPreparacion" Multiplicity="1" />
+          <End Role="ProductoPtoPrep" Type="Self.ProductoPtoPrep" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PtoPreparacion">
+              <PropertyRef Name="CodPtoPreparacion" />
+            </Principal>
+            <Dependent Role="ProductoPtoPrep">
+              <PropertyRef Name="CodPtoPreparacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TipoParametrica_Parametrica">
+          <End Role="TipoParametrica" Type="Self.TipoParametrica" Multiplicity="1" />
+          <End Role="Parametrica" Type="Self.Parametrica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoParametrica">
+              <PropertyRef Name="CodTipoParametrica" />
+            </Principal>
+            <Dependent Role="Parametrica">
+              <PropertyRef Name="CodTipoParametrica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="sp_add_productoptoprep" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="p_CodPtoPreparacion" Type="int" Mode="In" />
+          <Parameter Name="p_CodProducto" Type="varchar" Mode="In" />
+          <Parameter Name="p_IndEnsamblado" Type="int" Mode="In" />
+          <Parameter Name="p_TiempoPrepDirecto" Type="int" Mode="In" />
+          <Parameter Name="p_TiempoPrepSegundo" Type="int" Mode="In" />
+          <Parameter Name="p_MinCantidad" Type="int" Mode="In" />
+          <Parameter Name="p_MaxCantidad" Type="int" Mode="In" />
+          <Parameter Name="p_UsuarioCreacion" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_add_ptopreparacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="p_CodUnidadNegocio" Type="varchar" Mode="In" />
+          <Parameter Name="p_Nombre" Type="varchar" Mode="In" />
+          <Parameter Name="p_Descripcion" Type="varchar" Mode="In" />
+          <Parameter Name="p_UsuarioCreacion" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_add_tiempoconsumo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="p_CodTiempoConsumo" Type="int" Mode="In" />
+          <Parameter Name="p_CodGrupo" Type="varchar" Mode="In" />
+          <Parameter Name="p_CodSubGrupo" Type="varchar" Mode="In" />
+          <Parameter Name="p_CodProducto" Type="varchar" Mode="In" />
+          <Parameter Name="p_CodPropiedad" Type="varchar" Mode="In" />
+          <Parameter Name="p_CantPlatos" Type="int" Mode="In" />
+          <Parameter Name="p_MinComensales" Type="int" Mode="In" />
+          <Parameter Name="p_MaxComensales" Type="int" Mode="In" />
+          <Parameter Name="p_Tiempo" Type="int" Mode="In" />
+          <Parameter Name="p_UsuarioCreacion" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_get_aut_producto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="p_CodUnidadNegocio" Type="varchar" Mode="In" />
+          <Parameter Name="p_DescProducto" Type="varchar" Mode="In" />
+          <Parameter Name="p_EndIndex" Type="smallint" Mode="In" />
+        </Function>
+        <Function Name="sp_get_grupo_maestro" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="p_CodGrupo" Type="varchar" Mode="In" />
+          <Parameter Name="p_StartIndex" Type="smallint" Mode="In" />
+          <Parameter Name="p_EndIndex" Type="smallint" Mode="In" />
+          <Parameter Name="p_SortCol" Type="varchar" Mode="In" />
+          <Parameter Name="p_SortOrder" Type="varchar" Mode="In" />
+          <Parameter Name="p_TotalDisplayRecords" Type="int" Mode="InOut" />
+          <Parameter Name="p_TotalRecords" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="sp_get_pag_pedidoproducto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="p_CodPtoPreparacion" Type="int" Mode="In" />
+          <Parameter Name="p_StartIndex" Type="smallint" Mode="In" />
+          <Parameter Name="p_EndIndex" Type="smallint" Mode="In" />
+          <Parameter Name="p_SortCol" Type="varchar" Mode="In" />
+          <Parameter Name="p_SortOrder" Type="varchar" Mode="In" />
+          <Parameter Name="p_TotalDisplayRecords" Type="int" Mode="InOut" />
+          <Parameter Name="p_TotalRecords" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="sp_get_pag_productoptoprep" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="p_CodUnidadNegocio" Type="varchar" Mode="In" />
+          <Parameter Name="p_CodPtoPreparacion" Type="int" Mode="In" />
+          <Parameter Name="p_StartIndex" Type="smallint" Mode="In" />
+          <Parameter Name="p_EndIndex" Type="smallint" Mode="In" />
+          <Parameter Name="p_SortCol" Type="varchar" Mode="In" />
+          <Parameter Name="p_SortOrder" Type="varchar" Mode="In" />
+          <Parameter Name="p_TotalDisplayRecords" Type="int" Mode="InOut" />
+          <Parameter Name="p_TotalRecords" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="sp_get_pag_ptopreparacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="p_CodUnidadNegocio" Type="varchar" Mode="In" />
+          <Parameter Name="p_StartIndex" Type="smallint" Mode="In" />
+          <Parameter Name="p_EndIndex" Type="smallint" Mode="In" />
+          <Parameter Name="p_SortCol" Type="varchar" Mode="In" />
+          <Parameter Name="p_SortOrder" Type="varchar" Mode="In" />
+          <Parameter Name="p_TotalDisplayRecords" Type="int" Mode="InOut" />
+          <Parameter Name="p_TotalRecords" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="sp_get_producto_maestro" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="p_CodGrupo" Type="varchar" Mode="In" />
+          <Parameter Name="p_CodSubGrupo" Type="varchar" Mode="In" />
+          <Parameter Name="p_CodProducto" Type="varchar" Mode="In" />
+          <Parameter Name="p_DescProducto" Type="varchar" Mode="In" />
+          <Parameter Name="p_StartIndex" Type="smallint" Mode="In" />
+          <Parameter Name="p_EndIndex" Type="smallint" Mode="In" />
+          <Parameter Name="p_SortCol" Type="varchar" Mode="In" />
+          <Parameter Name="p_SortOrder" Type="varchar" Mode="In" />
+          <Parameter Name="p_TotalDisplayRecords" Type="int" Mode="InOut" />
+          <Parameter Name="p_TotalRecords" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="sp_get_productoptoprep" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="p_CodProductoPtoPrep" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_get_subgrupo_maestro" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="p_CodGrupo" Type="varchar" Mode="In" />
+          <Parameter Name="p_CodSubGrupo" Type="varchar" Mode="In" />
+          <Parameter Name="p_StartIndex" Type="smallint" Mode="In" />
+          <Parameter Name="p_EndIndex" Type="smallint" Mode="In" />
+          <Parameter Name="p_SortCol" Type="varchar" Mode="In" />
+          <Parameter Name="p_SortOrder" Type="varchar" Mode="In" />
+          <Parameter Name="p_TotalDisplayRecords" Type="int" Mode="InOut" />
+          <Parameter Name="p_TotalRecords" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="sp_get_tiempoconsumo_grupo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="p_CodGrupo" Type="varchar" Mode="In" />
+          <Parameter Name="p_CodPropiedad" Type="varchar" Mode="In" />
+          <Parameter Name="p_CantPlatos" Type="int" Mode="In" />
+          <Parameter Name="p_StartIndex" Type="smallint" Mode="In" />
+          <Parameter Name="p_EndIndex" Type="smallint" Mode="In" />
+          <Parameter Name="p_SortCol" Type="varchar" Mode="In" />
+          <Parameter Name="p_SortOrder" Type="varchar" Mode="In" />
+          <Parameter Name="p_TotalDisplayRecords" Type="int" Mode="InOut" />
+          <Parameter Name="p_TotalRecords" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="sp_get_tiempoconsumo_producto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="p_CodGrupo" Type="varchar" Mode="In" />
+          <Parameter Name="p_CodSubGrupo" Type="varchar" Mode="In" />
+          <Parameter Name="p_CodPropiedad" Type="varchar" Mode="In" />
+          <Parameter Name="p_CodProducto" Type="varchar" Mode="In" />
+          <Parameter Name="p_DescProducto" Type="varchar" Mode="In" />
+          <Parameter Name="p_CantPlatos" Type="int" Mode="In" />
+          <Parameter Name="p_StartIndex" Type="smallint" Mode="In" />
+          <Parameter Name="p_EndIndex" Type="smallint" Mode="In" />
+          <Parameter Name="p_SortCol" Type="varchar" Mode="In" />
+          <Parameter Name="p_SortOrder" Type="varchar" Mode="In" />
+          <Parameter Name="p_TotalDisplayRecords" Type="int" Mode="InOut" />
+          <Parameter Name="p_TotalRecords" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="sp_get_tiempoconsumo_subgrupo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="p_CodSubGrupo" Type="varchar" Mode="In" />
+          <Parameter Name="p_CodGrupo" Type="varchar" Mode="In" />
+          <Parameter Name="p_CodPropiedad" Type="varchar" Mode="In" />
+          <Parameter Name="p_CantPlatos" Type="int" Mode="In" />
+          <Parameter Name="p_StartIndex" Type="smallint" Mode="In" />
+          <Parameter Name="p_EndIndex" Type="smallint" Mode="In" />
+          <Parameter Name="p_SortCol" Type="varchar" Mode="In" />
+          <Parameter Name="p_SortOrder" Type="varchar" Mode="In" />
+          <Parameter Name="p_TotalDisplayRecords" Type="int" Mode="InOut" />
+          <Parameter Name="p_TotalRecords" Type="int" Mode="InOut" />
+        </Function>
+        <EntityContainer Name="KDSModelStoreContainer">
+          <EntitySet Name="Iconografia" EntityType="Self.Iconografia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OperadorPropiedad" EntityType="Self.OperadorPropiedad" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Parametrica" EntityType="Self.Parametrica" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PedidoProducto" EntityType="Self.PedidoProducto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductoPtoPrep" EntityType="Self.ProductoPtoPrep" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PtoPreparacion" EntityType="Self.PtoPreparacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TiempoConsumo" EntityType="Self.TiempoConsumo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoParametrica" EntityType="Self.TipoParametrica" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vw_Grupo" EntityType="Self.vw_Grupo" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_Grupo].[CodGrupo] AS [CodGrupo], 
+    [vw_Grupo].[Nombre] AS [Nombre], 
+    [vw_Grupo].[Desripcion] AS [Desripcion]
+    FROM [dbo].[vw_Grupo] AS [vw_Grupo]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vw_Producto" EntityType="Self.vw_Producto" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_Producto].[CodProducto] AS [CodProducto], 
+    [vw_Producto].[DescProducto] AS [DescProducto], 
+    [vw_Producto].[CodGrupo] AS [CodGrupo], 
+    [vw_Producto].[DescGrupo] AS [DescGrupo], 
+    [vw_Producto].[CodSubGrupo] AS [CodSubGrupo], 
+    [vw_Producto].[DescSubGrupo] AS [DescSubGrupo], 
+    [vw_Producto].[CodTipoProducto] AS [CodTipoProducto], 
+    [vw_Producto].[DescTipoProducto] AS [DescTipoProducto], 
+    [vw_Producto].[CodArea] AS [CodArea], 
+    [vw_Producto].[DescArea] AS [DescArea], 
+    [vw_Producto].[CodUnidadNegocio] AS [CodUnidadNegocio], 
+    [vw_Producto].[DescUnidadNegocio] AS [DescUnidadNegocio], 
+    [vw_Producto].[Combo] AS [Combo], 
+    [vw_Producto].[Activo] AS [Activo], 
+    [vw_Producto].[FechaRegistro] AS [FechaRegistro]
+    FROM [dbo].[vw_Producto] AS [vw_Producto]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vw_ProductoPedido" EntityType="Self.vw_ProductoPedido" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_ProductoPedido].[lCombo] AS [lCombo], 
+    [vw_ProductoPedido].[tCodigoPedido] AS [tCodigoPedido], 
+    [vw_ProductoPedido].[tItem] AS [tItem], 
+    [vw_ProductoPedido].[tItemCombo] AS [tItemCombo], 
+    [vw_ProductoPedido].[nOrden] AS [nOrden], 
+    [vw_ProductoPedido].[nCantidad] AS [nCantidad], 
+    [vw_ProductoPedido].[tCodigoGrupo] AS [tCodigoGrupo], 
+    [vw_ProductoPedido].[tDescGrupo] AS [tDescGrupo], 
+    [vw_ProductoPedido].[tCodigoSubGrupo] AS [tCodigoSubGrupo], 
+    [vw_ProductoPedido].[tDescSubGrupo] AS [tDescSubGrupo], 
+    [vw_ProductoPedido].[tCodigoProducto] AS [tCodigoProducto], 
+    [vw_ProductoPedido].[tDetallado] AS [tDetallado], 
+    [vw_ProductoPedido].[tCodigoPropiedad] AS [tCodigoPropiedad], 
+    [vw_ProductoPedido].[tDescPropiedad] AS [tDescPropiedad], 
+    [vw_ProductoPedido].[tTipoPedido] AS [tTipoPedido], 
+    [vw_ProductoPedido].[tDescTipoPedido] AS [tDescTipoPedido], 
+    [vw_ProductoPedido].[tArea] AS [tArea], 
+    [vw_ProductoPedido].[tDescArea] AS [tDescArea], 
+    [vw_ProductoPedido].[tUnidadNegocio] AS [tUnidadNegocio], 
+    [vw_ProductoPedido].[tDescUnidadNegocio] AS [tDescUnidadNegocio], 
+    [vw_ProductoPedido].[tEstadoItem] AS [tEstadoItem]
+    FROM [dbo].[vw_ProductoPedido] AS [vw_ProductoPedido]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vw_SubGrupo" EntityType="Self.vw_SubGrupo" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_SubGrupo].[CodGrupo] AS [CodGrupo], 
+    [vw_SubGrupo].[CodSubGrupo] AS [CodSubGrupo], 
+    [vw_SubGrupo].[Nombre] AS [Nombre], 
+    [vw_SubGrupo].[Desripcion] AS [Desripcion]
+    FROM [dbo].[vw_SubGrupo] AS [vw_SubGrupo]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vw_UnidadNegocio" EntityType="Self.vw_UnidadNegocio" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_UnidadNegocio].[CodUnidadNegocio] AS [CodUnidadNegocio], 
+    [vw_UnidadNegocio].[Nombre] AS [Nombre], 
+    [vw_UnidadNegocio].[Descripcion] AS [Descripcion]
+    FROM [dbo].[vw_UnidadNegocio] AS [vw_UnidadNegocio]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Parametrica_OperadorPropiedad" Association="Self.FK_Parametrica_OperadorPropiedad">
+            <End Role="Parametrica" EntitySet="Parametrica" />
+            <End Role="OperadorPropiedad" EntitySet="OperadorPropiedad" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Parametrica_PedidoProducto" Association="Self.FK_Parametrica_PedidoProducto">
+            <End Role="Parametrica" EntitySet="Parametrica" />
+            <End Role="PedidoProducto" EntitySet="PedidoProducto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PtoPreparacion_PedidoProducto" Association="Self.FK_PtoPreparacion_PedidoProducto">
+            <End Role="PtoPreparacion" EntitySet="PtoPreparacion" />
+            <End Role="PedidoProducto" EntitySet="PedidoProducto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PtoPreparacion_ProductoPtoPrep" Association="Self.FK_PtoPreparacion_ProductoPtoPrep">
+            <End Role="PtoPreparacion" EntitySet="PtoPreparacion" />
+            <End Role="ProductoPtoPrep" EntitySet="ProductoPtoPrep" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TipoParametrica_Parametrica" Association="Self.FK_TipoParametrica_Parametrica">
+            <End Role="TipoParametrica" EntitySet="TipoParametrica" />
+            <End Role="Parametrica" EntitySet="Parametrica" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="KDSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="MainModelContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Iconografia" EntityType="KDSModel.Iconografia" />
+          <EntitySet Name="OperadorPropiedad" EntityType="KDSModel.OperadorPropiedad" />
+          <EntitySet Name="Parametrica" EntityType="KDSModel.Parametrica" />
+          <EntitySet Name="PedidoProducto" EntityType="KDSModel.PedidoProducto" />
+          <EntitySet Name="PtoPreparacion" EntityType="KDSModel.PtoPreparacion" />
+          <EntitySet Name="TipoParametrica" EntityType="KDSModel.TipoParametrica" />
+          <AssociationSet Name="FK_Parametrica_OperadorPropiedad" Association="KDSModel.FK_Parametrica_OperadorPropiedad">
+            <End Role="Parametrica" EntitySet="Parametrica" />
+            <End Role="OperadorPropiedad" EntitySet="OperadorPropiedad" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Parametrica_PedidoProducto" Association="KDSModel.FK_Parametrica_PedidoProducto">
+            <End Role="Parametrica" EntitySet="Parametrica" />
+            <End Role="PedidoProducto" EntitySet="PedidoProducto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TipoParametrica_Parametrica" Association="KDSModel.FK_TipoParametrica_Parametrica">
+            <End Role="TipoParametrica" EntitySet="TipoParametrica" />
+            <End Role="Parametrica" EntitySet="Parametrica" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PtoPreparacion_PedidoProducto" Association="KDSModel.FK_PtoPreparacion_PedidoProducto">
+            <End Role="PtoPreparacion" EntitySet="PtoPreparacion" />
+            <End Role="PedidoProducto" EntitySet="PedidoProducto" />
+          </AssociationSet>
+          <EntitySet Name="vw_Grupo" EntityType="KDSModel.vw_Grupo" />
+          <EntitySet Name="vw_Producto" EntityType="KDSModel.vw_Producto" />
+          <EntitySet Name="vw_ProductoPedido" EntityType="KDSModel.vw_ProductoPedido" />
+          <EntitySet Name="vw_SubGrupo" EntityType="KDSModel.vw_SubGrupo" />
+          <EntitySet Name="vw_UnidadNegocio" EntityType="KDSModel.vw_UnidadNegocio" />
+          <FunctionImport Name="sp_add_ptopreparacion">
+            <Parameter Name="p_CodUnidadNegocio" Mode="In" Type="String" />
+            <Parameter Name="p_Nombre" Mode="In" Type="String" />
+            <Parameter Name="p_Descripcion" Mode="In" Type="String" />
+            <Parameter Name="p_UsuarioCreacion" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_add_productoptoprep">
+            <Parameter Name="p_CodPtoPreparacion" Mode="In" Type="Int32" />
+            <Parameter Name="p_CodProducto" Mode="In" Type="String" />
+            <Parameter Name="p_IndEnsamblado" Mode="In" Type="Int32" />
+            <Parameter Name="p_TiempoPrepDirecto" Mode="In" Type="Int32" />
+            <Parameter Name="p_TiempoPrepSegundo" Mode="In" Type="Int32" />
+            <Parameter Name="p_MinCantidad" Mode="In" Type="Int32" />
+            <Parameter Name="p_MaxCantidad" Mode="In" Type="Int32" />
+            <Parameter Name="p_UsuarioCreacion" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_get_aut_producto" ReturnType="Collection(KDSModel.sp_get_aut_producto_Result)">
+            <Parameter Name="p_CodUnidadNegocio" Mode="In" Type="String" />
+            <Parameter Name="p_DescProducto" Mode="In" Type="String" />
+            <Parameter Name="p_EndIndex" Mode="In" Type="Int16" />
+          </FunctionImport>
+          <FunctionImport Name="sp_get_pag_ptopreparacion" ReturnType="Collection(KDSModel.sp_get_pag_ptopreparacion_Result)">
+            <Parameter Name="p_CodUnidadNegocio" Mode="In" Type="String" />
+            <Parameter Name="p_StartIndex" Mode="In" Type="Int16" />
+            <Parameter Name="p_EndIndex" Mode="In" Type="Int16" />
+            <Parameter Name="p_SortCol" Mode="In" Type="String" />
+            <Parameter Name="p_SortOrder" Mode="In" Type="String" />
+            <Parameter Name="p_TotalDisplayRecords" Mode="InOut" Type="Int32" />
+            <Parameter Name="p_TotalRecords" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="ProductoPtoPrep" EntityType="KDSModel.ProductoPtoPrep" />
+          <AssociationSet Name="FK_PtoPreparacion_ProductoPtoPrep" Association="KDSModel.FK_PtoPreparacion_ProductoPtoPrep">
+            <End Role="PtoPreparacion" EntitySet="PtoPreparacion" />
+            <End Role="ProductoPtoPrep" EntitySet="ProductoPtoPrep" />
+          </AssociationSet>
+          <EntitySet Name="TiempoConsumo" EntityType="KDSModel.TiempoConsumo" />
+          <FunctionImport Name="sp_get_productoptoprep" ReturnType="Collection(KDSModel.sp_get_productoptoprep_Result)">
+          <Parameter Name="p_CodProductoPtoPrep" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_get_pag_productoptoprep" ReturnType="Collection(KDSModel.sp_get_pag_productoptoprep_Result)">
+            <Parameter Name="p_CodUnidadNegocio" Mode="In" Type="String" />
+            <Parameter Name="p_CodPtoPreparacion" Mode="In" Type="Int32" />
+            <Parameter Name="p_StartIndex" Mode="In" Type="Int16" />
+            <Parameter Name="p_EndIndex" Mode="In" Type="Int16" />
+            <Parameter Name="p_SortCol" Mode="In" Type="String" />
+            <Parameter Name="p_SortOrder" Mode="In" Type="String" />
+            <Parameter Name="p_TotalDisplayRecords" Mode="InOut" Type="Int32" />
+            <Parameter Name="p_TotalRecords" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_get_pag_pedidoproducto" ReturnType="Collection(KDSModel.sp_get_pag_pedidoproducto_Result)">
+            <Parameter Name="p_CodPtoPreparacion" Mode="In" Type="Int32" />
+            <Parameter Name="p_StartIndex" Mode="In" Type="Int16" />
+            <Parameter Name="p_EndIndex" Mode="In" Type="Int16" />
+            <Parameter Name="p_SortCol" Mode="In" Type="String" />
+            <Parameter Name="p_SortOrder" Mode="In" Type="String" />
+            <Parameter Name="p_TotalDisplayRecords" Mode="InOut" Type="Int32" />
+            <Parameter Name="p_TotalRecords" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_get_grupo_maestro" ReturnType="Collection(KDSModel.sp_get_grupo_maestro_Result)">
+            <Parameter Name="p_CodGrupo" Mode="In" Type="String" />
+            <Parameter Name="p_StartIndex" Mode="In" Type="Int16" />
+            <Parameter Name="p_EndIndex" Mode="In" Type="Int16" />
+            <Parameter Name="p_SortCol" Mode="In" Type="String" />
+            <Parameter Name="p_SortOrder" Mode="In" Type="String" />
+            <Parameter Name="p_TotalDisplayRecords" Mode="InOut" Type="Int32" />
+            <Parameter Name="p_TotalRecords" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_get_producto_maestro" ReturnType="Collection(KDSModel.sp_get_producto_maestro_Result)">
+            <Parameter Name="p_CodGrupo" Mode="In" Type="String" />
+            <Parameter Name="p_CodSubGrupo" Mode="In" Type="String" />
+            <Parameter Name="p_CodProducto" Mode="In" Type="String" />
+            <Parameter Name="p_DescProducto" Mode="In" Type="String" />
+            <Parameter Name="p_StartIndex" Mode="In" Type="Int16" />
+            <Parameter Name="p_EndIndex" Mode="In" Type="Int16" />
+            <Parameter Name="p_SortCol" Mode="In" Type="String" />
+            <Parameter Name="p_SortOrder" Mode="In" Type="String" />
+            <Parameter Name="p_TotalDisplayRecords" Mode="InOut" Type="Int32" />
+            <Parameter Name="p_TotalRecords" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_get_subgrupo_maestro" ReturnType="Collection(KDSModel.sp_get_subgrupo_maestro_Result)">
+            <Parameter Name="p_CodGrupo" Mode="In" Type="String" />
+            <Parameter Name="p_CodSubGrupo" Mode="In" Type="String" />
+            <Parameter Name="p_StartIndex" Mode="In" Type="Int16" />
+            <Parameter Name="p_EndIndex" Mode="In" Type="Int16" />
+            <Parameter Name="p_SortCol" Mode="In" Type="String" />
+            <Parameter Name="p_SortOrder" Mode="In" Type="String" />
+            <Parameter Name="p_TotalDisplayRecords" Mode="InOut" Type="Int32" />
+            <Parameter Name="p_TotalRecords" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_get_tiempoconsumo_grupo" ReturnType="Collection(KDSModel.sp_get_tiempoconsumo_grupo_Result)">
+            <Parameter Name="p_CodGrupo" Mode="In" Type="String" />
+            <Parameter Name="p_CodPropiedad" Mode="In" Type="String" />
+            <Parameter Name="p_CantPlatos" Mode="In" Type="Int32" />
+            <Parameter Name="p_StartIndex" Mode="In" Type="Int16" />
+            <Parameter Name="p_EndIndex" Mode="In" Type="Int16" />
+            <Parameter Name="p_SortCol" Mode="In" Type="String" />
+            <Parameter Name="p_SortOrder" Mode="In" Type="String" />
+            <Parameter Name="p_TotalDisplayRecords" Mode="InOut" Type="Int32" />
+            <Parameter Name="p_TotalRecords" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_get_tiempoconsumo_producto" ReturnType="Collection(KDSModel.sp_get_tiempoconsumo_producto_Result)">
+            <Parameter Name="p_CodGrupo" Mode="In" Type="String" />
+            <Parameter Name="p_CodSubGrupo" Mode="In" Type="String" />
+            <Parameter Name="p_CodPropiedad" Mode="In" Type="String" />
+            <Parameter Name="p_CodProducto" Mode="In" Type="String" />
+            <Parameter Name="p_DescProducto" Mode="In" Type="String" />
+            <Parameter Name="p_CantPlatos" Mode="In" Type="Int32" />
+            <Parameter Name="p_StartIndex" Mode="In" Type="Int16" />
+            <Parameter Name="p_EndIndex" Mode="In" Type="Int16" />
+            <Parameter Name="p_SortCol" Mode="In" Type="String" />
+            <Parameter Name="p_SortOrder" Mode="In" Type="String" />
+            <Parameter Name="p_TotalDisplayRecords" Mode="InOut" Type="Int32" />
+            <Parameter Name="p_TotalRecords" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_get_tiempoconsumo_subgrupo" ReturnType="Collection(KDSModel.sp_get_tiempoconsumo_subgrupo_Result)">
+            <Parameter Name="p_CodSubGrupo" Mode="In" Type="String" />
+            <Parameter Name="p_CodGrupo" Mode="In" Type="String" />
+            <Parameter Name="p_CodPropiedad" Mode="In" Type="String" />
+            <Parameter Name="p_CantPlatos" Mode="In" Type="Int32" />
+            <Parameter Name="p_StartIndex" Mode="In" Type="Int16" />
+            <Parameter Name="p_EndIndex" Mode="In" Type="Int16" />
+            <Parameter Name="p_SortCol" Mode="In" Type="String" />
+            <Parameter Name="p_SortOrder" Mode="In" Type="String" />
+            <Parameter Name="p_TotalDisplayRecords" Mode="InOut" Type="Int32" />
+            <Parameter Name="p_TotalRecords" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_add_tiempoconsumo">
+            <Parameter Name="p_CodTiempoConsumo" Mode="In" Type="Int32" />
+            <Parameter Name="p_CodGrupo" Mode="In" Type="String" />
+            <Parameter Name="p_CodSubGrupo" Mode="In" Type="String" />
+            <Parameter Name="p_CodProducto" Mode="In" Type="String" />
+            <Parameter Name="p_CodPropiedad" Mode="In" Type="String" />
+            <Parameter Name="p_CantPlatos" Mode="In" Type="Int32" />
+            <Parameter Name="p_MinComensales" Mode="In" Type="Int32" />
+            <Parameter Name="p_MaxComensales" Mode="In" Type="Int32" />
+            <Parameter Name="p_Tiempo" Mode="In" Type="Int32" />
+            <Parameter Name="p_UsuarioCreacion" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <EntityType Name="Iconografia">
+          <Key>
+            <PropertyRef Name="CodIconografia" />
+          </Key>
+          <Property Name="CodIconografia" Type="Int32" Nullable="false" />
+          <Property Name="CodProducto" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="CodOperador" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="CodPropiedad" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="NombreArchivo" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="EstadoRegistro" Type="Boolean" Nullable="false" />
+          <Property Name="UsuarioCreacion" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UsuarioModificacion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="OperadorPropiedad">
+          <Key>
+            <PropertyRef Name="CodOperadorPropiedad" />
+          </Key>
+          <Property Name="CodOperadorPropiedad" Type="Int32" Nullable="false" />
+          <Property Name="CodContexto" Type="Int32" Nullable="false" />
+          <Property Name="CodOperador" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="CodPropiedad" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="EstadoRegistro" Type="Boolean" Nullable="false" />
+          <Property Name="UsuarioCreacion" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UsuarioModificacion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Parametrica" Relationship="KDSModel.FK_Parametrica_OperadorPropiedad" FromRole="OperadorPropiedad" ToRole="Parametrica" />
+        </EntityType>
+        <EntityType Name="Parametrica">
+          <Key>
+            <PropertyRef Name="CodParametrica" />
+          </Key>
+          <Property Name="CodParametrica" Type="Int32" Nullable="false" />
+          <Property Name="CodTipoParametrica" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="Boolean" />
+          <Property Name="EstadoRegistro" Type="Boolean" Nullable="false" />
+          <Property Name="UsuarioCreacion" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UsuarioModificacion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="OperadorPropiedad" Relationship="KDSModel.FK_Parametrica_OperadorPropiedad" FromRole="Parametrica" ToRole="OperadorPropiedad" />
+          <NavigationProperty Name="PedidoProducto" Relationship="KDSModel.FK_Parametrica_PedidoProducto" FromRole="Parametrica" ToRole="PedidoProducto" />
+          <NavigationProperty Name="TipoParametrica" Relationship="KDSModel.FK_TipoParametrica_Parametrica" FromRole="Parametrica" ToRole="TipoParametrica" />
+          <Property Name="NombreAux" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Valor" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="PedidoProducto">
+          <Key>
+            <PropertyRef Name="CodPedidoProducto" />
+          </Key>
+          <Property Name="CodPedidoProducto" Type="Int32" Nullable="false" />
+          <Property Name="CodPtoPreparacion" Type="Int32" Nullable="false" />
+          <Property Name="CodEstadoPedidoProd" Type="Int32" />
+          <Property Name="CodPedido" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="CodProducto" Type="String" Nullable="false" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="CodOperador" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="CodPropiedad" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="HoraSalida" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Observaciones" Type="String" MaxLength="800" FixedLength="false" Unicode="false" />
+          <Property Name="EstadoRegistro" Type="Boolean" Nullable="false" />
+          <Property Name="UsuarioCreacion" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UsuarioModificacion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Parametrica" Relationship="KDSModel.FK_Parametrica_PedidoProducto" FromRole="PedidoProducto" ToRole="Parametrica" />
+          <NavigationProperty Name="PtoPreparacion" Relationship="KDSModel.FK_PtoPreparacion_PedidoProducto" FromRole="PedidoProducto" ToRole="PtoPreparacion" />
+        </EntityType>
+        <EntityType Name="PtoPreparacion">
+          <Key>
+            <PropertyRef Name="CodPtoPreparacion" />
+          </Key>
+          <Property Name="CodPtoPreparacion" Type="Int32" Nullable="false" />
+          <Property Name="CodUnidadNegocio" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+          <Property Name="EstadoRegistro" Type="Boolean" Nullable="false" />
+          <Property Name="UsuarioCreacion" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UsuarioModificacion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="PedidoProducto" Relationship="KDSModel.FK_PtoPreparacion_PedidoProducto" FromRole="PtoPreparacion" ToRole="PedidoProducto" />
+          <NavigationProperty Name="ProductoPtoPrep" Relationship="KDSModel.FK_PtoPreparacion_ProductoPtoPrep" FromRole="PtoPreparacion" ToRole="ProductoPtoPrep" />
+        </EntityType>
+        <EntityType Name="TipoParametrica">
+          <Key>
+            <PropertyRef Name="CodTipoParametrica" />
+          </Key>
+          <Property Name="CodTipoParametrica" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+          <Property Name="EstadoRegistro" Type="Boolean" Nullable="false" />
+          <Property Name="UsuarioCreacion" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UsuarioModificacion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Parametrica" Relationship="KDSModel.FK_TipoParametrica_Parametrica" FromRole="TipoParametrica" ToRole="Parametrica" />
+        </EntityType>
+        <Association Name="FK_Parametrica_OperadorPropiedad">
+          <End Type="KDSModel.Parametrica" Role="Parametrica" Multiplicity="1" />
+          <End Type="KDSModel.OperadorPropiedad" Role="OperadorPropiedad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parametrica">
+              <PropertyRef Name="CodParametrica" />
+            </Principal>
+            <Dependent Role="OperadorPropiedad">
+              <PropertyRef Name="CodContexto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Parametrica_PedidoProducto">
+          <End Type="KDSModel.Parametrica" Role="Parametrica" Multiplicity="0..1" />
+          <End Type="KDSModel.PedidoProducto" Role="PedidoProducto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parametrica">
+              <PropertyRef Name="CodParametrica" />
+            </Principal>
+            <Dependent Role="PedidoProducto">
+              <PropertyRef Name="CodEstadoPedidoProd" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TipoParametrica_Parametrica">
+          <End Type="KDSModel.TipoParametrica" Role="TipoParametrica" Multiplicity="1" />
+          <End Type="KDSModel.Parametrica" Role="Parametrica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoParametrica">
+              <PropertyRef Name="CodTipoParametrica" />
+            </Principal>
+            <Dependent Role="Parametrica">
+              <PropertyRef Name="CodTipoParametrica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PtoPreparacion_PedidoProducto">
+          <End Type="KDSModel.PtoPreparacion" Role="PtoPreparacion" Multiplicity="1" />
+          <End Type="KDSModel.PedidoProducto" Role="PedidoProducto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PtoPreparacion">
+              <PropertyRef Name="CodPtoPreparacion" />
+            </Principal>
+            <Dependent Role="PedidoProducto">
+              <PropertyRef Name="CodPtoPreparacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="vw_Grupo">
+          <Key>
+            <PropertyRef Name="CodGrupo" />
+          </Key>
+          <Property Name="CodGrupo" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="Nombre" Type="String" MaxLength="24" FixedLength="false" Unicode="true" />
+          <Property Name="Desripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="vw_Producto">
+          <Key>
+            <PropertyRef Name="CodProducto" />
+          </Key>
+          <Property Name="CodProducto" Type="String" Nullable="false" MaxLength="7" FixedLength="false" Unicode="true" />
+          <Property Name="DescProducto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CodGrupo" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="DescGrupo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CodSubGrupo" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="DescSubGrupo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CodTipoProducto" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="DescTipoProducto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CodArea" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="DescArea" Type="String" MaxLength="24" FixedLength="false" Unicode="true" />
+          <Property Name="CodUnidadNegocio" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="DescUnidadNegocio" Type="String" MaxLength="24" FixedLength="false" Unicode="true" />
+          <Property Name="Combo" Type="Boolean" />
+          <Property Name="Activo" Type="Boolean" />
+          <Property Name="FechaRegistro" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="vw_ProductoPedido">
+          <Key>
+            <PropertyRef Name="lCombo" />
+            <PropertyRef Name="tCodigoPedido" />
+            <PropertyRef Name="tItem" />
+            <PropertyRef Name="tDescPropiedad" />
+          </Key>
+          <Property Name="lCombo" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="tCodigoPedido" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="tItem" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="tItemCombo" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="nOrden" Type="Int32" />
+          <Property Name="nCantidad" Type="Double" />
+          <Property Name="tCodigoGrupo" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="tDescGrupo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="tCodigoSubGrupo" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="tDescSubGrupo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="tCodigoProducto" Type="String" MaxLength="7" FixedLength="false" Unicode="true" />
+          <Property Name="tDetallado" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="tCodigoPropiedad" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="tDescPropiedad" Type="String" Nullable="false" MaxLength="103" FixedLength="false" Unicode="true" />
+          <Property Name="tTipoPedido" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="tDescTipoPedido" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="tArea" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="tDescArea" Type="String" MaxLength="24" FixedLength="false" Unicode="true" />
+          <Property Name="tUnidadNegocio" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="tDescUnidadNegocio" Type="String" MaxLength="24" FixedLength="false" Unicode="true" />
+          <Property Name="tEstadoItem" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="vw_SubGrupo">
+          <Key>
+            <PropertyRef Name="CodGrupo" />
+            <PropertyRef Name="CodSubGrupo" />
+          </Key>
+          <Property Name="CodGrupo" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="CodSubGrupo" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="Nombre" Type="String" MaxLength="24" FixedLength="false" Unicode="true" />
+          <Property Name="Desripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="vw_UnidadNegocio">
+          <Key>
+            <PropertyRef Name="CodUnidadNegocio" />
+          </Key>
+          <Property Name="CodUnidadNegocio" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Nombre" Type="String" MaxLength="24" FixedLength="false" Unicode="true" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <ComplexType Name="sp_get_aut_producto_Result">
+          <Property Type="String" Name="CodProducto" Nullable="false" MaxLength="7" />
+          <Property Type="String" Name="DescProducto" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="sp_get_pag_ptopreparacion_Result">
+          <Property Type="String" Name="NombreUnidadNegocio" Nullable="true" MaxLength="24" />
+          <Property Type="Int32" Name="CodPtoPreparacion" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="40" />
+          <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="400" />
+        </ComplexType>
+        <EntityType Name="ProductoPtoPrep">
+          <Key>
+            <PropertyRef Name="CodProductoPtoPrep" />
+          </Key>
+          <Property Name="CodProductoPtoPrep" Type="Int32" Nullable="false" />
+          <Property Name="CodPtoPreparacion" Type="Int32" Nullable="false" />
+          <Property Name="CodProducto" Type="String" Nullable="false" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="IndEnsamblado" Type="Boolean" Nullable="false" />
+          <Property Name="TiempoPrepDirecto" Type="Int16" Nullable="false" />
+          <Property Name="TiempoPrepSegundo" Type="Int16" Nullable="false" />
+          <Property Name="MinCantidad" Type="Byte" Nullable="false" />
+          <Property Name="MaxCantidad" Type="Byte" Nullable="false" />
+          <Property Name="EstadoRegistro" Type="Boolean" Nullable="false" />
+          <Property Name="UsuarioCreacion" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UsuarioModificacion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="PtoPreparacion" Relationship="KDSModel.FK_PtoPreparacion_ProductoPtoPrep" FromRole="ProductoPtoPrep" ToRole="PtoPreparacion" />
+        </EntityType>
+        <Association Name="FK_PtoPreparacion_ProductoPtoPrep">
+          <End Type="KDSModel.PtoPreparacion" Role="PtoPreparacion" Multiplicity="1" />
+          <End Type="KDSModel.ProductoPtoPrep" Role="ProductoPtoPrep" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PtoPreparacion">
+              <PropertyRef Name="CodPtoPreparacion" />
+            </Principal>
+            <Dependent Role="ProductoPtoPrep">
+              <PropertyRef Name="CodPtoPreparacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="TiempoConsumo">
+          <Key>
+            <PropertyRef Name="CodTiempoConsumo" />
+          </Key>
+          <Property Name="CodTiempoConsumo" Type="Int32" Nullable="false" />
+          <Property Name="CodGrupo" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="CodSubgrupo" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="CodProducto" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="CodPropiedad" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Cantidad" Type="Byte" Nullable="false" />
+          <Property Name="MinComensales" Type="Byte" Nullable="false" />
+          <Property Name="MaxComensales" Type="Byte" Nullable="false" />
+          <Property Name="Tiempo" Type="Int16" Nullable="false" />
+          <Property Name="EstadoRegistro" Type="Boolean" Nullable="false" />
+          <Property Name="UsuarioCreacion" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UsuarioModificacion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+        </EntityType>
+        <ComplexType Name="sp_get_productoptoprep_Result">
+          <Property Type="Int32" Name="CodProductoPtoPrep" Nullable="false" />
+          <Property Type="String" Name="CodUnidadNegocio" Nullable="true" MaxLength="2" />
+          <Property Type="Int32" Name="CodPtoPreparacion" Nullable="false" />
+          <Property Type="String" Name="CodProducto" Nullable="false" MaxLength="7" />
+          <Property Type="String" Name="DescProducto" Nullable="true" MaxLength="50" />
+          <Property Type="Int16" Name="TiempoPrepDirecto" Nullable="false" />
+          <Property Type="Int16" Name="TiempoPrepSegundo" Nullable="false" />
+          <Property Type="Byte" Name="MinCantidad" Nullable="false" />
+          <Property Type="Byte" Name="MaxCantidad" Nullable="false" />
+          <Property Type="Boolean" Name="IndEnsamblado" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="sp_get_pag_productoptoprep_Result">
+          <Property Type="Int32" Name="CodProductoPtoPrep" Nullable="false" />
+          <Property Type="String" Name="DescProducto" Nullable="true" MaxLength="50" />
+          <Property Type="Int16" Name="TiempoPrepDirecto" Nullable="false" />
+          <Property Type="Int16" Name="TiempoPrepSegundo" Nullable="false" />
+          <Property Type="Byte" Name="MinCantidad" Nullable="false" />
+          <Property Type="Byte" Name="MaxCantidad" Nullable="false" />
+          <Property Type="Boolean" Name="IndEnsamblado" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="sp_get_pag_pedidoproducto_Result">
+          <Property Type="String" Name="PuntoPreparacion" Nullable="true" MaxLength="400" />
+          <Property Type="String" Name="CodPedido" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="Mesa" Nullable="true" MaxLength="3" />
+          <Property Type="Int32" Name="PasoServicio" Nullable="true" />
+          <Property Type="Int32" Name="Cantidad" Nullable="false" />
+          <Property Type="String" Name="ImagenProducto" Nullable="true" MaxLength="441" />
+          <Property Type="String" Name="ImagenOperador" Nullable="true" MaxLength="441" />
+          <Property Type="String" Name="ImagenPropiedad" Nullable="true" MaxLength="441" />
+          <Property Type="String" Name="Producto" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Operador" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Propiedad" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Observaciones" Nullable="false" MaxLength="1" />
+          <Property Type="DateTime" Name="HoraSalida" Nullable="false" Precision="23" />
+          <Property Type="String" Name="Estado" Nullable="true" MaxLength="443" />
+        </ComplexType>
+        <ComplexType Name="sp_get_grupo_maestro_Result">
+          <Property Type="Int64" Name="row" Nullable="true" />
+          <Property Type="String" Name="CodGrupo" Nullable="false" MaxLength="2" />
+          <Property Type="String" Name="DescGrupo" Nullable="true" MaxLength="24" />
+        </ComplexType>
+        <ComplexType Name="sp_get_producto_maestro_Result">
+          <Property Type="Int64" Name="row" Nullable="true" />
+          <Property Type="String" Name="CodProducto" Nullable="false" MaxLength="7" />
+          <Property Type="String" Name="DescProducto" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CodGrupo" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="DescGrupo" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CodSubGrupo" Nullable="true" MaxLength="4" />
+          <Property Type="String" Name="DescSubGrupo" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="sp_get_subgrupo_maestro_Result">
+          <Property Type="Int64" Name="row" Nullable="true" />
+          <Property Type="String" Name="CodGrupo" Nullable="false" MaxLength="2" />
+          <Property Type="String" Name="DescGrupo" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CodSubGrupo" Nullable="false" MaxLength="4" />
+          <Property Type="String" Name="DescSubGrupo" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="sp_get_tiempoconsumo_grupo_Result">
+          <Property Type="Int64" Name="row" Nullable="true" />
+          <Property Type="String" Name="CodGrupo" Nullable="false" MaxLength="2" />
+          <Property Type="String" Name="DescGrupo" Nullable="true" MaxLength="24" />
+          <Property Type="Byte" Name="Cantidad" Nullable="false" />
+          <Property Type="Byte" Name="MinComensales" Nullable="false" />
+          <Property Type="Byte" Name="MaxComensales" Nullable="false" />
+          <Property Type="Int16" Name="Tiempo" Nullable="false" />
+          <Property Type="Int32" Name="CodTiempoConsumo" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="sp_get_tiempoconsumo_producto_Result">
+          <Property Type="Int64" Name="row" Nullable="true" />
+          <Property Type="String" Name="CodProducto" Nullable="false" MaxLength="7" />
+          <Property Type="String" Name="DescProducto" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CodGrupo" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="DescGrupo" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CodSubGrupo" Nullable="true" MaxLength="4" />
+          <Property Type="String" Name="DescSubGrupo" Nullable="true" MaxLength="50" />
+          <Property Type="Byte" Name="Cantidad" Nullable="false" />
+          <Property Type="Byte" Name="MinComensales" Nullable="false" />
+          <Property Type="Byte" Name="MaxComensales" Nullable="false" />
+          <Property Type="Int16" Name="Tiempo" Nullable="false" />
+          <Property Type="Int32" Name="CodTiempoConsumo" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="sp_get_tiempoconsumo_subgrupo_Result">
+          <Property Type="Int64" Name="row" Nullable="true" />
+          <Property Type="String" Name="CodGrupo" Nullable="false" MaxLength="2" />
+          <Property Type="String" Name="DescGrupo" Nullable="true" MaxLength="24" />
+          <Property Type="String" Name="CodSubGrupo" Nullable="false" MaxLength="4" />
+          <Property Type="String" Name="DescSubGrupo" Nullable="true" MaxLength="24" />
+          <Property Type="Byte" Name="Cantidad" Nullable="false" />
+          <Property Type="Byte" Name="MinComensales" Nullable="false" />
+          <Property Type="Byte" Name="MaxComensales" Nullable="false" />
+          <Property Type="Int16" Name="Tiempo" Nullable="false" />
+          <Property Type="Int32" Name="CodTiempoConsumo" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="KDSModelStoreContainer" CdmEntityContainer="MainModelContext">
+          <EntitySetMapping Name="Iconografia">
+            <EntityTypeMapping TypeName="KDSModel.Iconografia">
+              <MappingFragment StoreEntitySet="Iconografia">
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="UsuarioModificacion" ColumnName="UsuarioModificacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="EstadoRegistro" ColumnName="EstadoRegistro" />
+                <ScalarProperty Name="NombreArchivo" ColumnName="NombreArchivo" />
+                <ScalarProperty Name="CodPropiedad" ColumnName="CodPropiedad" />
+                <ScalarProperty Name="CodOperador" ColumnName="CodOperador" />
+                <ScalarProperty Name="CodProducto" ColumnName="CodProducto" />
+                <ScalarProperty Name="CodIconografia" ColumnName="CodIconografia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OperadorPropiedad">
+            <EntityTypeMapping TypeName="KDSModel.OperadorPropiedad">
+              <MappingFragment StoreEntitySet="OperadorPropiedad">
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="UsuarioModificacion" ColumnName="UsuarioModificacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="EstadoRegistro" ColumnName="EstadoRegistro" />
+                <ScalarProperty Name="CodPropiedad" ColumnName="CodPropiedad" />
+                <ScalarProperty Name="CodOperador" ColumnName="CodOperador" />
+                <ScalarProperty Name="CodContexto" ColumnName="CodContexto" />
+                <ScalarProperty Name="CodOperadorPropiedad" ColumnName="CodOperadorPropiedad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Parametrica">
+            <EntityTypeMapping TypeName="KDSModel.Parametrica">
+              <MappingFragment StoreEntitySet="Parametrica">
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="NombreAux" ColumnName="NombreAux" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="UsuarioModificacion" ColumnName="UsuarioModificacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="EstadoRegistro" ColumnName="EstadoRegistro" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="CodTipoParametrica" ColumnName="CodTipoParametrica" />
+                <ScalarProperty Name="CodParametrica" ColumnName="CodParametrica" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PedidoProducto">
+            <EntityTypeMapping TypeName="KDSModel.PedidoProducto">
+              <MappingFragment StoreEntitySet="PedidoProducto">
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="UsuarioModificacion" ColumnName="UsuarioModificacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="EstadoRegistro" ColumnName="EstadoRegistro" />
+                <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+                <ScalarProperty Name="HoraSalida" ColumnName="HoraSalida" />
+                <ScalarProperty Name="CodPropiedad" ColumnName="CodPropiedad" />
+                <ScalarProperty Name="CodOperador" ColumnName="CodOperador" />
+                <ScalarProperty Name="CodProducto" ColumnName="CodProducto" />
+                <ScalarProperty Name="CodPedido" ColumnName="CodPedido" />
+                <ScalarProperty Name="CodEstadoPedidoProd" ColumnName="CodEstadoPedidoProd" />
+                <ScalarProperty Name="CodPtoPreparacion" ColumnName="CodPtoPreparacion" />
+                <ScalarProperty Name="CodPedidoProducto" ColumnName="CodPedidoProducto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PtoPreparacion">
+            <EntityTypeMapping TypeName="KDSModel.PtoPreparacion">
+              <MappingFragment StoreEntitySet="PtoPreparacion">
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="UsuarioModificacion" ColumnName="UsuarioModificacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="EstadoRegistro" ColumnName="EstadoRegistro" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="CodUnidadNegocio" ColumnName="CodUnidadNegocio" />
+                <ScalarProperty Name="CodPtoPreparacion" ColumnName="CodPtoPreparacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoParametrica">
+            <EntityTypeMapping TypeName="KDSModel.TipoParametrica">
+              <MappingFragment StoreEntitySet="TipoParametrica">
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="UsuarioModificacion" ColumnName="UsuarioModificacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="EstadoRegistro" ColumnName="EstadoRegistro" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="CodTipoParametrica" ColumnName="CodTipoParametrica" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_Grupo">
+            <EntityTypeMapping TypeName="KDSModel.vw_Grupo">
+              <MappingFragment StoreEntitySet="vw_Grupo">
+                <ScalarProperty Name="Desripcion" ColumnName="Desripcion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="CodGrupo" ColumnName="CodGrupo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_Producto">
+            <EntityTypeMapping TypeName="KDSModel.vw_Producto">
+              <MappingFragment StoreEntitySet="vw_Producto">
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="Combo" ColumnName="Combo" />
+                <ScalarProperty Name="DescUnidadNegocio" ColumnName="DescUnidadNegocio" />
+                <ScalarProperty Name="CodUnidadNegocio" ColumnName="CodUnidadNegocio" />
+                <ScalarProperty Name="DescArea" ColumnName="DescArea" />
+                <ScalarProperty Name="CodArea" ColumnName="CodArea" />
+                <ScalarProperty Name="DescTipoProducto" ColumnName="DescTipoProducto" />
+                <ScalarProperty Name="CodTipoProducto" ColumnName="CodTipoProducto" />
+                <ScalarProperty Name="DescSubGrupo" ColumnName="DescSubGrupo" />
+                <ScalarProperty Name="CodSubGrupo" ColumnName="CodSubGrupo" />
+                <ScalarProperty Name="DescGrupo" ColumnName="DescGrupo" />
+                <ScalarProperty Name="CodGrupo" ColumnName="CodGrupo" />
+                <ScalarProperty Name="DescProducto" ColumnName="DescProducto" />
+                <ScalarProperty Name="CodProducto" ColumnName="CodProducto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_ProductoPedido">
+            <EntityTypeMapping TypeName="KDSModel.vw_ProductoPedido">
+              <MappingFragment StoreEntitySet="vw_ProductoPedido">
+                <ScalarProperty Name="tEstadoItem" ColumnName="tEstadoItem" />
+                <ScalarProperty Name="tDescUnidadNegocio" ColumnName="tDescUnidadNegocio" />
+                <ScalarProperty Name="tUnidadNegocio" ColumnName="tUnidadNegocio" />
+                <ScalarProperty Name="tDescArea" ColumnName="tDescArea" />
+                <ScalarProperty Name="tArea" ColumnName="tArea" />
+                <ScalarProperty Name="tDescTipoPedido" ColumnName="tDescTipoPedido" />
+                <ScalarProperty Name="tTipoPedido" ColumnName="tTipoPedido" />
+                <ScalarProperty Name="tDescPropiedad" ColumnName="tDescPropiedad" />
+                <ScalarProperty Name="tCodigoPropiedad" ColumnName="tCodigoPropiedad" />
+                <ScalarProperty Name="tDetallado" ColumnName="tDetallado" />
+                <ScalarProperty Name="tCodigoProducto" ColumnName="tCodigoProducto" />
+                <ScalarProperty Name="tDescSubGrupo" ColumnName="tDescSubGrupo" />
+                <ScalarProperty Name="tCodigoSubGrupo" ColumnName="tCodigoSubGrupo" />
+                <ScalarProperty Name="tDescGrupo" ColumnName="tDescGrupo" />
+                <ScalarProperty Name="tCodigoGrupo" ColumnName="tCodigoGrupo" />
+                <ScalarProperty Name="nCantidad" ColumnName="nCantidad" />
+                <ScalarProperty Name="nOrden" ColumnName="nOrden" />
+                <ScalarProperty Name="tItemCombo" ColumnName="tItemCombo" />
+                <ScalarProperty Name="tItem" ColumnName="tItem" />
+                <ScalarProperty Name="tCodigoPedido" ColumnName="tCodigoPedido" />
+                <ScalarProperty Name="lCombo" ColumnName="lCombo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_SubGrupo">
+            <EntityTypeMapping TypeName="KDSModel.vw_SubGrupo">
+              <MappingFragment StoreEntitySet="vw_SubGrupo">
+                <ScalarProperty Name="Desripcion" ColumnName="Desripcion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="CodSubGrupo" ColumnName="CodSubGrupo" />
+                <ScalarProperty Name="CodGrupo" ColumnName="CodGrupo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_UnidadNegocio">
+            <EntityTypeMapping TypeName="KDSModel.vw_UnidadNegocio">
+              <MappingFragment StoreEntitySet="vw_UnidadNegocio">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="CodUnidadNegocio" ColumnName="CodUnidadNegocio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_add_ptopreparacion" FunctionName="KDSModel.Store.sp_add_ptopreparacion" />
+          <FunctionImportMapping FunctionImportName="sp_add_productoptoprep" FunctionName="KDSModel.Store.sp_add_productoptoprep" />
+          <FunctionImportMapping FunctionImportName="sp_get_aut_producto" FunctionName="KDSModel.Store.sp_get_aut_producto">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="KDSModel.sp_get_aut_producto_Result">
+                <ScalarProperty Name="CodProducto" ColumnName="CodProducto" />
+                <ScalarProperty Name="DescProducto" ColumnName="DescProducto" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_get_pag_ptopreparacion" FunctionName="KDSModel.Store.sp_get_pag_ptopreparacion">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="KDSModel.sp_get_pag_ptopreparacion_Result">
+                <ScalarProperty Name="NombreUnidadNegocio" ColumnName="NombreUnidadNegocio" />
+                <ScalarProperty Name="CodPtoPreparacion" ColumnName="CodPtoPreparacion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="ProductoPtoPrep">
+            <EntityTypeMapping TypeName="KDSModel.ProductoPtoPrep">
+              <MappingFragment StoreEntitySet="ProductoPtoPrep">
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="UsuarioModificacion" ColumnName="UsuarioModificacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="EstadoRegistro" ColumnName="EstadoRegistro" />
+                <ScalarProperty Name="MaxCantidad" ColumnName="MaxCantidad" />
+                <ScalarProperty Name="MinCantidad" ColumnName="MinCantidad" />
+                <ScalarProperty Name="TiempoPrepSegundo" ColumnName="TiempoPrepSegundo" />
+                <ScalarProperty Name="TiempoPrepDirecto" ColumnName="TiempoPrepDirecto" />
+                <ScalarProperty Name="IndEnsamblado" ColumnName="IndEnsamblado" />
+                <ScalarProperty Name="CodProducto" ColumnName="CodProducto" />
+                <ScalarProperty Name="CodPtoPreparacion" ColumnName="CodPtoPreparacion" />
+                <ScalarProperty Name="CodProductoPtoPrep" ColumnName="CodProductoPtoPrep" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TiempoConsumo">
+            <EntityTypeMapping TypeName="KDSModel.TiempoConsumo">
+              <MappingFragment StoreEntitySet="TiempoConsumo">
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="UsuarioModificacion" ColumnName="UsuarioModificacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="EstadoRegistro" ColumnName="EstadoRegistro" />
+                <ScalarProperty Name="Tiempo" ColumnName="Tiempo" />
+                <ScalarProperty Name="MaxComensales" ColumnName="MaxComensales" />
+                <ScalarProperty Name="MinComensales" ColumnName="MinComensales" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="CodPropiedad" ColumnName="CodPropiedad" />
+                <ScalarProperty Name="CodProducto" ColumnName="CodProducto" />
+                <ScalarProperty Name="CodSubgrupo" ColumnName="CodSubgrupo" />
+                <ScalarProperty Name="CodGrupo" ColumnName="CodGrupo" />
+                <ScalarProperty Name="CodTiempoConsumo" ColumnName="CodTiempoConsumo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_get_productoptoprep" FunctionName="KDSModel.Store.sp_get_productoptoprep">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="KDSModel.sp_get_productoptoprep_Result">
+                <ScalarProperty Name="CodProductoPtoPrep" ColumnName="CodProductoPtoPrep" />
+                <ScalarProperty Name="CodUnidadNegocio" ColumnName="CodUnidadNegocio" />
+                <ScalarProperty Name="CodPtoPreparacion" ColumnName="CodPtoPreparacion" />
+                <ScalarProperty Name="CodProducto" ColumnName="CodProducto" />
+                <ScalarProperty Name="DescProducto" ColumnName="DescProducto" />
+                <ScalarProperty Name="TiempoPrepDirecto" ColumnName="TiempoPrepDirecto" />
+                <ScalarProperty Name="TiempoPrepSegundo" ColumnName="TiempoPrepSegundo" />
+                <ScalarProperty Name="MinCantidad" ColumnName="MinCantidad" />
+                <ScalarProperty Name="MaxCantidad" ColumnName="MaxCantidad" />
+                <ScalarProperty Name="IndEnsamblado" ColumnName="IndEnsamblado" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_get_pag_productoptoprep" FunctionName="KDSModel.Store.sp_get_pag_productoptoprep">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="KDSModel.sp_get_pag_productoptoprep_Result">
+                <ScalarProperty Name="CodProductoPtoPrep" ColumnName="CodProductoPtoPrep" />
+                <ScalarProperty Name="DescProducto" ColumnName="DescProducto" />
+                <ScalarProperty Name="TiempoPrepDirecto" ColumnName="TiempoPrepDirecto" />
+                <ScalarProperty Name="TiempoPrepSegundo" ColumnName="TiempoPrepSegundo" />
+                <ScalarProperty Name="MinCantidad" ColumnName="MinCantidad" />
+                <ScalarProperty Name="MaxCantidad" ColumnName="MaxCantidad" />
+                <ScalarProperty Name="IndEnsamblado" ColumnName="IndEnsamblado" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_get_pag_pedidoproducto" FunctionName="KDSModel.Store.sp_get_pag_pedidoproducto">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="KDSModel.sp_get_pag_pedidoproducto_Result">
+                <ScalarProperty Name="PuntoPreparacion" ColumnName="PuntoPreparacion" />
+                <ScalarProperty Name="CodPedido" ColumnName="CodPedido" />
+                <ScalarProperty Name="Mesa" ColumnName="Mesa" />
+                <ScalarProperty Name="PasoServicio" ColumnName="PasoServicio" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="ImagenProducto" ColumnName="ImagenProducto" />
+                <ScalarProperty Name="ImagenOperador" ColumnName="ImagenOperador" />
+                <ScalarProperty Name="ImagenPropiedad" ColumnName="ImagenPropiedad" />
+                <ScalarProperty Name="Producto" ColumnName="Producto" />
+                <ScalarProperty Name="Operador" ColumnName="Operador" />
+                <ScalarProperty Name="Propiedad" ColumnName="Propiedad" />
+                <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+                <ScalarProperty Name="HoraSalida" ColumnName="HoraSalida" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_get_grupo_maestro" FunctionName="KDSModel.Store.sp_get_grupo_maestro">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="KDSModel.sp_get_grupo_maestro_Result">
+                <ScalarProperty Name="row" ColumnName="row" />
+                <ScalarProperty Name="CodGrupo" ColumnName="CodGrupo" />
+                <ScalarProperty Name="DescGrupo" ColumnName="DescGrupo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_get_producto_maestro" FunctionName="KDSModel.Store.sp_get_producto_maestro">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="KDSModel.sp_get_producto_maestro_Result">
+                <ScalarProperty Name="row" ColumnName="row" />
+                <ScalarProperty Name="CodProducto" ColumnName="CodProducto" />
+                <ScalarProperty Name="DescProducto" ColumnName="DescProducto" />
+                <ScalarProperty Name="CodGrupo" ColumnName="CodGrupo" />
+                <ScalarProperty Name="DescGrupo" ColumnName="DescGrupo" />
+                <ScalarProperty Name="CodSubGrupo" ColumnName="CodSubGrupo" />
+                <ScalarProperty Name="DescSubGrupo" ColumnName="DescSubGrupo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_get_subgrupo_maestro" FunctionName="KDSModel.Store.sp_get_subgrupo_maestro">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="KDSModel.sp_get_subgrupo_maestro_Result">
+                <ScalarProperty Name="row" ColumnName="row" />
+                <ScalarProperty Name="CodGrupo" ColumnName="CodGrupo" />
+                <ScalarProperty Name="DescGrupo" ColumnName="DescGrupo" />
+                <ScalarProperty Name="CodSubGrupo" ColumnName="CodSubGrupo" />
+                <ScalarProperty Name="DescSubGrupo" ColumnName="DescSubGrupo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_get_tiempoconsumo_grupo" FunctionName="KDSModel.Store.sp_get_tiempoconsumo_grupo">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="KDSModel.sp_get_tiempoconsumo_grupo_Result">
+                <ScalarProperty Name="row" ColumnName="row" />
+                <ScalarProperty Name="CodGrupo" ColumnName="CodGrupo" />
+                <ScalarProperty Name="DescGrupo" ColumnName="DescGrupo" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="MinComensales" ColumnName="MinComensales" />
+                <ScalarProperty Name="MaxComensales" ColumnName="MaxComensales" />
+                <ScalarProperty Name="Tiempo" ColumnName="Tiempo" />
+                <ScalarProperty Name="CodTiempoConsumo" ColumnName="CodTiempoConsumo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_get_tiempoconsumo_producto" FunctionName="KDSModel.Store.sp_get_tiempoconsumo_producto">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="KDSModel.sp_get_tiempoconsumo_producto_Result">
+                <ScalarProperty Name="row" ColumnName="row" />
+                <ScalarProperty Name="CodProducto" ColumnName="CodProducto" />
+                <ScalarProperty Name="DescProducto" ColumnName="DescProducto" />
+                <ScalarProperty Name="CodGrupo" ColumnName="CodGrupo" />
+                <ScalarProperty Name="DescGrupo" ColumnName="DescGrupo" />
+                <ScalarProperty Name="CodSubGrupo" ColumnName="CodSubGrupo" />
+                <ScalarProperty Name="DescSubGrupo" ColumnName="DescSubGrupo" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="MinComensales" ColumnName="MinComensales" />
+                <ScalarProperty Name="MaxComensales" ColumnName="MaxComensales" />
+                <ScalarProperty Name="Tiempo" ColumnName="Tiempo" />
+                <ScalarProperty Name="CodTiempoConsumo" ColumnName="CodTiempoConsumo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_get_tiempoconsumo_subgrupo" FunctionName="KDSModel.Store.sp_get_tiempoconsumo_subgrupo">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="KDSModel.sp_get_tiempoconsumo_subgrupo_Result">
+                <ScalarProperty Name="row" ColumnName="row" />
+                <ScalarProperty Name="CodGrupo" ColumnName="CodGrupo" />
+                <ScalarProperty Name="DescGrupo" ColumnName="DescGrupo" />
+                <ScalarProperty Name="CodSubGrupo" ColumnName="CodSubGrupo" />
+                <ScalarProperty Name="DescSubGrupo" ColumnName="DescSubGrupo" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="MinComensales" ColumnName="MinComensales" />
+                <ScalarProperty Name="MaxComensales" ColumnName="MaxComensales" />
+                <ScalarProperty Name="Tiempo" ColumnName="Tiempo" />
+                <ScalarProperty Name="CodTiempoConsumo" ColumnName="CodTiempoConsumo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_add_tiempoconsumo" FunctionName="KDSModel.Store.sp_add_tiempoconsumo" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

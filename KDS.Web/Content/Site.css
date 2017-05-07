@@ -1,0 +1,179 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+/*input,
+select,
+textarea {
+    max-width: 280px;
+}*/
+
+/* styles for validation helpers */
+.field-validation-error {
+    color: #b94a48;
+    font-size: 0.75em;
+    /*font-size: 11px;*/
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+input.input-validation-error {
+    border: 1px solid #b94a48;
+}
+
+input[type="checkbox"].input-validation-error {
+    border: 0 none;
+}
+
+.validation-summary-errors {
+    color: #b94a48;
+    font-size: 0.75em;
+    /*font-size: 11px;*/
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+.data-val-required {
+    color: #b94a48;
+    /*font-size: 11px;*/
+    font-size: 0.75em;
+    font-weight: normal;
+}
+
+/*colors*/
+.dark {
+    color: #333333 !important;
+}
+.white {
+    color: #FFFFFF !important;
+}
+.red {
+    color: #DD5A43 !important;
+}
+.red2 {
+    color: #E08374 !important;
+}
+.light-red {
+    color: #FF7777 !important;
+}
+.blue {
+    color: #478FCA !important;
+}
+.light-blue {
+    color: #93CBF9 !important;
+}
+.green {
+    color: #69AA46 !important;
+}
+.light-green {
+    color: #B0D877 !important;
+}
+.orange {
+    color: #FF892A !important;
+}
+.orange2 {
+    color: #FEB902 !important;
+}
+.light-orange {
+    color: #FCAC6F !important;
+}
+.purple {
+    color: #A069C3 !important;
+}
+.pink {
+    color: #C6699F !important;
+}
+.pink2 {
+    color: #D6487E !important;
+}
+.brown {
+    color: #A52A2A !important;
+}
+.grey {
+    color: #777777 !important;
+}
+.light-grey {
+    color: #BBBBBB !important;
+}
+
+/**/
+.action-buttons a {
+    display: inline-block;
+    margin: 0 3px;
+    opacity: 0.85;
+    transition: all 0.1s ease 0s;
+}
+.action-buttons a:hover {
+    opacity: 1;
+    text-decoration: none;
+    transform: scale(1.2);
+}
+
+.center, .align-center {
+    text-align: center !important;
+}
+
+.row.filter {
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 15px;
+}
+
+.row.table {
+    padding-left: 30px;
+}
+
+.form-group > button.btn-only {
+    margin-top: 23px;
+}
+
+.modal-lg {
+    width: 900px;
+}
+
+.fieldset {
+    border: 1px solid #DDD;
+    padding: 0 1.4em 1.4em 1.4em;
+    margin: 0 0 1.5em 0;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    padding: 0 1em 1em;
+}
+
+.legend {
+    width: inherit;
+    padding: 0;
+    border-bottom: none;
+    /*font-size: 13px;*/
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.middle {
+    vertical-align: middle !important;
+}
+
+.container {
+    max-width: 100%;
+}

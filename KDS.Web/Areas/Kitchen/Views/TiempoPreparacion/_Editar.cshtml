@@ -1,0 +1,256 @@
+﻿@model KDS.Web.Areas.Kitchen.Models.ProductoPtoPrepViewModel
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { autocomplete = "off", id = "frmProductoPtoPrep", role = "form" }))
+{
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Tiempo estimado de preparación</h4>
+            </div>
+            <div class="modal-body">
+                @Html.HiddenFor(model => model.CodProductoPtoPrep)
+                @Html.HiddenFor(model => model.CodProducto)
+                @Html.HiddenFor(model => model.MinCantidad)
+                @Html.HiddenFor(model => model.MaxCantidad)
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="checkbox checkbox-primary">
+                            @Html.CheckBoxFor(m => m.IndEnsamblado)
+                            @Html.LabelFor(model => model.IndEnsamblado)
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.CodUnidadNegocio)
+                            @Html.DropDownListFor(model => model.CodUnidadNegocio, Model.UnidadesNegocio, "-Seleccione-", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.CodUnidadNegocio)
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.CodPtoPreparacion)
+                            @Html.DropDownListFor(model => model.CodPtoPreparacion, Model.PtosPreparacion, "-Seleccione-", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.CodPtoPreparacion)
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.DescProducto)
+                            @Html.TextBoxFor(model => model.DescProducto, new { @class = "form-control", placeholder = "Ingrese el nombre del producto a buscar...", @data_provide = "typeahead" })
+                            @Html.ValidationMessageFor(model => model.DescProducto)
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <fieldset class="fieldset">
+                            <legend class="legend">Tiempo de preparación (minutos)</legend>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.TiempoPrepDirecto)
+                                        @Html.TextBoxFor(model => model.TiempoPrepDirecto, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.TiempoPrepDirecto)
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.TiempoPrepSegundo)
+                                        @Html.TextBoxFor(model => model.TiempoPrepSegundo, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.TiempoPrepSegundo)
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="Cantidad">Cantidad de porciones</label>
+                            <input type="text" id="Cantidad" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="btnGuardar">Guardar</button>
+            </div>
+        </div>
+    </div>
+}
+
+<script type="text/javascript">
+    //#region Variables Globales
+    //#endregion
+
+    //#region Funciones Globales
+    //#endregion
+    $(function () {
+        //#region Variables
+        var $form = $('#frmProductoPtoPrep');
+        var $codUnidadNegocio = $('#frmProductoPtoPrep #CodUnidadNegocio');
+        var $codPtoPreparacion = $('#frmProductoPtoPrep #CodPtoPreparacion');
+        var $codProducto = $('#frmProductoPtoPrep #CodProducto');
+        var $descProducto = $('#frmProductoPtoPrep #DescProducto');
+        var $tiempoPrepDirecto = $('#frmProductoPtoPrep #TiempoPrepDirecto');
+        var $tiempoPrepSegundo = $('#frmProductoPtoPrep #TiempoPrepSegundo');
+        var $cantidad = $('#frmProductoPtoPrep #Cantidad');
+        var $minCantidad = $('#frmProductoPtoPrep #MinCantidad');
+        var $maxCantidad = $('#frmProductoPtoPrep #MaxCantidad');
+        var $btnGuardar = $('#frmProductoPtoPrep #btnGuardar');
+        var vDescProducto = '';
+        //#endregion
+
+        //#region Configuración
+        $tiempoPrepDirecto.TouchSpin({
+            max: 60
+        });
+
+        $tiempoPrepSegundo.TouchSpin({
+            max: 60
+        });
+
+        $cantidad.ionRangeSlider({
+            type: "double",
+            grid: true,
+            min: 0,
+            max: 20,
+            from: @Model.MinCantidad,
+            to: @Model.MaxCantidad
+        });
+
+        $descProducto.typeahead({
+            minLength: 3,
+            items: 'all',
+            fitToElement: true,
+            showHintOnFocus: true,
+            //displayText: 'name',
+            delay: 400,
+            source: function (query, process) {
+                $.ajax({
+                    url: '@Url.Action("ObtenerProductosAutocompletado")',
+                    data: {
+                        codUnidadNegocio: function () { return $codUnidadNegocio.val(); },
+                        descProducto: query
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        var array = $.map(data, function (item) {
+                            return {
+                                id: item.Id,
+                                name: item.Name
+                            }
+                        });
+                        return process(array);
+                    }
+                });
+            },
+            matcher: function () {
+                return true;
+            },
+            highlighter: function (item) {
+                var array = $.trim(this.query).split(' ');
+                $.each(array, function (index, value) {
+                    var regex = new RegExp('(' + value + ')', 'gi');
+                    item = item.replace(regex, "<b>$1</b>");
+                });
+                return item;
+            },
+            afterSelect: function (item) {
+                $codProducto.val(item.id);
+                vDescProducto = item.name;
+            }
+        });
+        //#endregion
+
+        //#region Funciones
+        function listarPtosPreparacion() {
+            $codPtoPreparacion.empty().append($("<option/>").attr("value", "").text("-Seleccione-")).prop("disabled", true);;
+            if ($codUnidadNegocio.val() === '') {
+                return;
+            }
+            $.getJSON('@Url.Action("ObtenerPuntosxUnidadNegocio")', { codUnidadNegocio: $codUnidadNegocio.val() }, function (items) {
+                $.each(items, function (index, item) {
+                    $codPtoPreparacion.append($("<option/>").attr("value", item.Value).text(item.Text));
+                });
+            });
+            $codPtoPreparacion.prop("disabled", false);
+        };
+
+        function actualizarProducto() {
+            $codProducto.val('');
+            $descProducto.val('').prop("readonly", true);
+            vDescProducto = ''
+            if ($codUnidadNegocio.val() === '') {
+                return;
+            }
+            $descProducto.prop("readonly", false);
+        };
+
+        function cambiarUnidadNegocio() {
+            listarPtosPreparacion();
+            actualizarProducto();
+        };
+
+        function editarProductoPtoPrep() {
+            if ($form.isValid()) {
+                $.ajax({
+                    url: '@Url.Action("Editar")',
+                    type: 'POST',
+                    data: $form.serializeForm(),
+                    success: function (result) {
+                        var data = $.parseJSON(result);
+                        if (data.Succeeded) {
+                            cargarGrdProductoPtoPrep();
+                            $('#dlgProductoPtoPrep').modal('hide');
+                        }
+                        notify(data);
+                    }
+                });
+            }
+        };
+
+        function load() {
+            $form.cleanValidation();
+            $form.showRequiredFields();
+        }
+        //#endregion
+
+        //#region Eventos
+        //Button
+        $btnGuardar.click(function () { editarProductoPtoPrep(); });
+        //Select
+        $codUnidadNegocio.change(function () { cambiarUnidadNegocio(); });
+        //Input[type=text]
+        $descProducto.bind("change paste keyup", function () {
+            if (vDescProducto !== '' && $(this).val() !== vDescProducto) {
+                $codProducto.val('');
+                vDescProducto = '';
+            }
+        }).blur(function () {
+            if ($(this).val() !== '' && vDescProducto === '') {
+                $(this).val('');
+            }
+        });
+        $cantidad.on("change", function () {
+            var $this = $(this),
+                value = $this.prop("value").split(";");
+            $minCantidad.val(value[0]);
+            $maxCantidad.val(value[1]);
+        });
+        //#endregion
+
+        //#region Load
+        load()
+        //#endregion
+    });
+</script>

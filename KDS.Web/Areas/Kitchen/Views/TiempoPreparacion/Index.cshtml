@@ -1,0 +1,226 @@
+﻿@model KDS.Web.Areas.Kitchen.Models.BandejaTiempoPreparacionViewModel
+
+@{
+    ViewBag.Title = "Gestión de Tiempos de Preparación";
+}
+
+<h2>Gestión de Tiempos de Preparación</h2>
+
+<p>    
+    <button type="button" class="btn btn-link" id="btnCrear">Crear nuevo</button>
+</p>
+
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h3 class="panel-title">Listado de Productos</h3>
+    </div>
+    <div class="row filter">
+        <div class="col-md-2">
+            <div class="form-group">
+                @Html.LabelFor(model => model.CodUnidadNegocio)
+                @Html.DropDownListFor(model => model.CodUnidadNegocio, Model.UnidadesNegocio, "-Todas-", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CodUnidadNegocio)
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                @Html.LabelFor(model => model.CodPtoPreparacion)
+                @Html.DropDownListFor(model => model.CodPtoPreparacion, Model.PtosPreparacion, "-Todos-", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CodPtoPreparacion)
+            </div>
+        </div>
+        <div class="col-md-1">
+            <div class="form-group">
+                <button type="button" id="btnFiltrar" class="btn btn-default btn-only"><i class="fa fa-filter"></i> Filtrar</button>
+            </div>
+        </div>
+    </div>
+    <div class="row table">
+        <table id="grdProductoPtoPrep" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <th rowspan="2" width="7%"></th>
+                    <th class="center middle" rowspan="2" width="43%">Producto</th>
+                    <th class="center" colspan="2" width="20%">Tiempo preparación</th>
+                    <th class="center" colspan="2" width="20%">Cantidad</th>
+                    <th class="center middle" rowspan="2" width="10%">Ensamblado</th>
+                    <th rowspan="2"></th>
+                </tr>
+                <tr>
+                    <th class="center">Directo</th>
+                    <th class="center">Segundo</th>
+                    <th class="center">Mínima</th>
+                    <th class="center">Máxima</th>
+                </tr>
+            </thead>
+        </table>
+    </div>    
+</div>
+
+<div class="modal fade" id="dlgProductoPtoPrep" tabindex="-1" role="dialog"></div>
+
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+        //#region Variables Globales
+        var grdProductoPtoPrep;
+        var indGrdProductoPtoPrep = false;
+        //#endregion
+
+        //#region Funciones Globales
+        function cargarGrdProductoPtoPrep() {
+            if (indGrdProductoPtoPrep) {
+                grdProductoPtoPrep.fnDraw();
+                return;
+            }
+
+            grdProductoPtoPrep =
+                $("#grdProductoPtoPrep").dataTable({
+                    order: [[1, "asc"]],
+                    ajax: {
+                        "url": '@Url.Action("ObtenerProductosPaginado")',
+                        "data": function (data) {
+                            data.codUnidadNegocio = function () { return $('#CodUnidadNegocio').val() };
+                            data.codPtoPreparacion = function () { return $('#CodPtoPreparacion').val() };
+                        }
+                    },
+                    aoColumns: [
+                        {
+                            "sClass": "center",
+                            "bSortable": false,
+                            "render": function (data, type, row) {
+                                var html = '';
+                                html += '<div class="action-buttons">';
+                                html += '<a href="javascript:;" class="green" onclick="editarProductoPtoPrep(\'' + row[7] + '\');"><i class="fa fa-pencil fa-lg"></i></a>';
+                                html += '<a href="javascript:;" class="red" onclick="eliminarProductoPtoPrep(\'' + row[7] + '\');"><i class="fa fa-trash-o fa-lg"></i></a>';
+                                html += '</div>';
+                                return html;
+                            }
+                        },
+                        {
+                            "sName": "DescProducto"
+                        },
+                        {
+                            "sName": "TiempoPrepDirecto",
+                            "sClass": "center"
+                        },
+                        {
+                            "sName": "TiempoPrepSegundo",
+                            "sClass": "center"
+                        },
+                        {
+                            "sName": "MinCantidad",
+                            "sClass": "center"
+                        },
+                        {
+                            "sName": "MaxCantidad",
+                            "sClass": "center"
+                        },
+                        {
+                            "sName": "IndEnsamblado",
+                            "sClass": "center",
+                            "bSortable": false,
+                            "render": function (data) {
+                                var checked = data === "1" ? ' checked ' : ' ';
+                                return '<input type="checkbox"' + checked + 'onclick="return false">';
+                                //var html = '<div class="checkbox checkbox-primary">';
+                                //html += '<input type="checkbox"' + checked + 'onclick="return false">';
+                                //html += '<label></label>';
+                                //html += '</div>';
+                                //return html;
+                            }
+                        },
+                        {
+                            "bVisible": false
+                        },
+                      ]
+                });
+
+            indGrdProductoPtoPrep = true;
+        }
+
+        function editarProductoPtoPrep(id) {
+            $.ajax({
+                url: '@Url.Action("Editar")',
+                data: { id: id },
+                success: function (result) {
+                    $("#dlgProductoPtoPrep").empty().html(result).modal();
+                }
+            });
+        };
+
+        function eliminarProductoPtoPrep(id) {
+            var promise = ask();
+            promise.done(function (resolve) {
+                var notice = resolve.notice;
+                $.ajax({
+                    url: '@Url.Action("Eliminar")',
+                    type: 'POST',
+                    data: { id: id },
+                    success: function (result) {
+                        var data = $.parseJSON(result);
+                        if (data.Succeeded) {
+                            cargarGrdProductoPtoPrep();
+                        }
+                        notify(data);
+                    }
+                });
+            });
+        };
+        //#endregion
+
+        $(function () {
+            //#region Variables
+            //#endregion
+
+            //#region Configuración
+            //#endregion
+
+            //#region Funciones
+            function listarPtosPreparacion() {
+                $('#CodPtoPreparacion').empty().append($("<option/>").attr("value", "").text("-Todos-"));
+                if ($('#CodUnidadNegocio').val() == '') {
+                    return;
+                }
+                $.getJSON('@Url.Action("ObtenerPuntosxUnidadNegocio")', { codUnidadNegocio: $('#CodUnidadNegocio').val() }, function (items) {
+                    $.each(items, function (index, item) {
+                        $('#CodPtoPreparacion').append($("<option/>").attr("value", item.Value).text(item.Text));
+                    });
+                });
+            };
+
+            function crearProductoPtoPrep() {
+                $.ajax({
+                    url: '@Url.Action("Crear")',
+                    success: function (result) {
+                        $("#dlgProductoPtoPrep").empty().html(result).modal();
+                    }
+                });
+            };
+
+            function cerrarProductoPtoPrep() {
+                $("#dlgProductoPtoPrep").empty();
+            };
+
+            function load() {
+                cargarGrdProductoPtoPrep();
+            }
+            //#endregion
+
+            //#region Eventos
+            //Button
+            $('#btnCrear').click(function () { crearProductoPtoPrep(); });
+            $('#btnFiltrar').click(function () { cargarGrdProductoPtoPrep(); });
+            //Select
+            $("#CodUnidadNegocio").change(function () { listarPtosPreparacion(); });
+            //Modal
+            $('#dlgProductoPtoPrep').on('hidden.bs.modal', function () { cerrarProductoPtoPrep(); });
+            //#endregion
+
+            //#region Load
+            load()
+            //#endregion
+        });
+    </script>
+}

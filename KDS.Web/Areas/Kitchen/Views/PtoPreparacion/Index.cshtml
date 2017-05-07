@@ -1,0 +1,189 @@
+﻿@model KDS.Web.Areas.Kitchen.Models.BandejaPtoPreparacionViewModel
+
+@{
+    ViewBag.Title = "Gestión de Puntos de Preparación";
+}
+
+<h2>Gestión de Puntos de Preparación</h2>
+
+<p>    
+    <button type="button" class="btn btn-link" id="btnCrear">Crear nuevo</button>
+</p>
+
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h3 class="panel-title">Listado de Puntos de Preparación</h3>
+    </div>
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmBandejaPtoPreparacion", role = "form" }))
+    {
+        <div class="row filter">
+            <div class="col-md-2">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CodUnidadNegocio)
+                    @Html.DropDownListFor(model => model.CodUnidadNegocio, Model.UnidadesNegocio, "-Todas-", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.CodUnidadNegocio)
+                </div>
+            </div>
+            <div class="col-md-1">
+                <div class="form-group">
+                    <button type="button" id="btnFiltrar" class="btn btn-default btn-only"><i class="fa fa-filter"></i> Filtrar</button>
+                </div>
+            </div>
+        </div>
+    }
+    <div class="row table">
+        <table id="grdPtoPreparacion" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th class="center">Unidad Negocio</th>
+                    <th class="center">Nombre</th>
+                    <th class="center">Descripción</th>
+                    <th></th>
+                </tr>
+            </thead>
+        </table>
+    </div>    
+</div>
+
+<div class="modal fade" id="dlgPtoPreparacion" tabindex="-1" role="dialog"></div>
+
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+        //#region Variables Globales
+        var grdPtoPreparacion;
+        var indGrdPtoPreparacion = false;
+        //#endregion
+
+        //#region Funciones Globales
+        function cargarGrdPtoPreparacion() {
+            var form = $('#frmBandejaPtoPreparacion');
+            if (!form.isValid()) {
+                return;
+            }
+
+            if (indGrdPtoPreparacion) {
+                grdPtoPreparacion.fnDraw();
+                return;
+            }
+
+            grdPtoPreparacion =
+                $("#grdPtoPreparacion").dataTable({
+                    order: [[1, "asc"]],
+                    ajax: {
+                        "url": '@Url.Action("ObtenerPaginado")',
+                        "data": function (data) {
+                            data.codUnidadNegocio = function () { return $('#CodUnidadNegocio').val() };
+                        }
+                    },
+                    aoColumns: [
+                        {
+                            "sWidth": "7%",
+                            "sClass": "center",
+                            "bSortable": false,
+                            "render": function (data, type, row) {
+                                var html = '';
+                                html += '<div class="action-buttons">';
+                                html += '<a href="javascript:;" class="green" onclick="editarPtoPreparacion(\'' + row[4] + '\');"><i class="fa fa-pencil fa-lg"></i></a>';
+                                html += '<a href="javascript:;" class="red" onclick="eliminarPtoPreparacion(\'' + row[4] + '\');"><i class="fa fa-trash-o fa-lg"></i></a>';
+                                html += '</div>';
+                                return html;
+                            }
+                        },
+                        {
+                            "sName": "NombreUnidadNegocio",
+                            "sWidth": "15%"
+
+                        },
+                        {
+                            "sName": "Nombre",
+                            "sWidth": "25%",
+                        },
+                        {
+                            "sName": "Descripcion"
+                        },
+                        {
+                            "bVisible": false
+                        },
+                      ]
+                });
+
+            indGrdPtoPreparacion = true;
+        }
+
+        function editarPtoPreparacion(id) {
+            $.ajax({
+                url: '@Url.Action("Editar")',
+                data: { id: id },
+                success: function (result) {
+                    $("#dlgPtoPreparacion").empty().html(result).modal();
+                }
+            });
+        };
+
+        function eliminarPtoPreparacion(id) {
+            var promise = ask();
+            promise.done(function (resolve) {
+                var notice = resolve.notice;
+                $.ajax({
+                    url: '@Url.Action("Eliminar")',
+                    type: 'POST',
+                    data: { id: id },
+                    success: function (result) {
+                        var data = $.parseJSON(result);
+                        if (data.Succeeded) {
+                            cargarGrdPtoPreparacion();
+                        }
+                        notify(data);
+                    }
+                });
+            });
+        };
+        //#endregion
+
+        $(function () {
+            //#region Variables
+            //#endregion
+
+            //#region Configuración
+            //#endregion
+
+            //#region Funciones
+            function crearPtoPreparacion() {
+                $.ajax({
+                    url: '@Url.Action("Crear")',
+                    success: function (result) {
+                        $("#dlgPtoPreparacion").empty().html(result).modal();
+                    }
+                });
+            };
+
+            function cerrarPtoPreparacion() {
+                $("#dlgPtoPreparacion").empty();
+
+                var form = $('#frmBandejaPtoPreparacion');                
+                form.cleanValidation();
+                form.showRequiredFields();
+            };
+
+            function load() {
+                cargarGrdPtoPreparacion();
+            }
+            //#endregion
+
+            //#region Eventos
+            //Button
+            $('#btnCrear').click(function () { crearPtoPreparacion(); });
+            $('#btnFiltrar').click(function () { cargarGrdPtoPreparacion(); });
+            //Modal
+            $('#dlgPtoPreparacion').on('hidden.bs.modal', function () { cerrarPtoPreparacion(); });
+            //#endregion
+
+            //#region Load
+            load()
+            //#endregion
+        });
+    </script>
+}
